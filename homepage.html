@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GaganYatri</title>
+    <link rel="icon" href="GY favicon.png" type="png">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            background: #000;
+            overflow-x: hidden;
+        }
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Send the video to the background */
+        }
+        header h1 {
+            font-size: 4rem;
+            text-shadow: 0 0 20px #fff;
+        }
+        header p {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            text-shadow: 0 0 10px #fff;
+        }
+        header .button-group {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            
+        }
+        header button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            color: #000;
+            background: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 4px 4px 5px darkgrey;
+        }
+        header button:hover {
+            transform: scale(1.1);
+        }
+        section {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .adventures {
+            background: #111;
+        }
+        .adventures h2 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .adventure-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .card {
+            background: #222;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 300px;
+            text-align: left;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .card p {
+            font-size: 1rem;
+        }
+        .why-us {
+            background: linear-gradient(to right, #000, #222);
+            color: #fff;
+        }
+        .why-us ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .why-us li {
+            margin: 1rem 0;
+            font-size: 1.2rem;
+        }
+        .book-now {
+            background: #111;
+        }
+        .spacecraft {
+            background: #111;
+        }
+        .spacecraft h2 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .spacecraft-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .spacecraft-card {
+            background: #222;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .spacecraft-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .spacecraft-card h3 {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+        }
+        .launch-sites {
+            background: #111;
+        }
+        .launch-sites h2 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .launch-sites-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .launch-site-card {
+            background: #222;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .launch-site-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .launch-site-card h3 {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+        }
+        footer {
+            background: #000;
+            padding: 2rem;
+            text-align: center;
+        }
+        footer a {
+            color: #0af;
+            margin: 0 0.5rem;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <video src="bg video.mp4" autoplay loop muted></video>
+        <h1>Welcome to GaganYatri</h1>
+        <p>Your buddy😎 for space tarvel<br>Experience the thrill of space exploration!</p>
+        <div class="button-group">
+            <button onclick="window.open('explorepage.html', '_blank')">Explore Now</button>
+            <button onclick="window.open('bookingpage.html', '_blank')">Book Now</button>
+        </div>   
+    </header>
+
+    <section class="adventures">
+        <h2>Our Adventures</h2>
+        <div class="adventure-cards">
+            <div class="card">
+                <h3>View of Earth and Moon 100km Above</h3>
+                <p>Witness breathtaking views of Earth and the Moon from 100km above the surface.</p>
+            </div>
+            <div class="card">
+                <h3>View of Earth and Moon 200km Above</h3>
+                <p>Enjoy an even more expansive view of Earth and the Moon from 200km above.</p>
+            </div>
+            <div class="card">
+                <h3>Trip to Space Parks Near Space Station</h3>
+                <p>Experience the beauty and serenity of space parks near the space station.</p>
+            </div>
+            <div class="card">
+                <h3>Trip to Near Moon</h3>
+                <p>Get up close to the Moon and explore its surface from a near distance.</p>
+            </div>
+            <div class="card">
+                <h3>Trip to Moon</h3>
+                <p>Embark on a journey to the Moon and experience its surface like never before.</p>
+            </div>
+            <div class="card">
+                <h3>Trip to Mars</h3>
+                <p>Join a groundbreaking expedition to explore the Red Planet.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="spacecraft">
+        <h2>Our Spacecraft</h2>
+        <div class="spacecraft-cards">
+            <div class="spacecraft-card">
+                <img src="falcon.jpg" alt="Falcon">
+                <h3>Falcon</h3>
+            </div>
+            <div class="spacecraft-card">
+                <img src="starship.jpg" alt="Starship">
+                <h3>Starship</h3>
+            </div>
+            <div class="spacecraft-card">
+                <img src="gaganyan.jpg" alt="Gaganyaan">
+                <h3>Gaganyaan</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="launch-sites">
+        <h2>Our Launch Sites</h2>
+        <div class="launch-sites-cards">
+            <div class="launch-site-card">
+                <img src="launchsite Chennai.webp" alt="Chennai, India">
+                <h3>Chennai, India</h3>
+            </div>
+            <div class="launch-site-card">
+                <img src="launchsite SF.webp" alt="San Francisco, USA">
+                <h3>San Francisco, USA</h3>
+            </div>
+            <div class="launch-site-card">
+                <img src="launchsite Monaco.webp" alt="Monaco, Europe">
+                <h3>Monaco, Europe</h3>
+            </div>
+            <div class="launch-site-card">
+                <img src="launchsite Tokyo.webp" alt="Hong Kong, Japan">
+                <h3>Hong Kong, Japan</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-us">
+        <h2>Why Choose Us?</h2>
+        <ul>
+            <li>World-class spacecraft and crew.</li>
+            <li>Unmatched safety and comfort.</li>
+            <li>Once-in-a-lifetime experiences.</li>
+        </ul>
+    </section>
+
+    <section class="book-now">
+        <h2>Book Your Adventure Now!</h2>
+        <button onclick="window.location.href='booking.html'">Book Now</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Space Adventures</p>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+    </footer>
+</body>
+</html>

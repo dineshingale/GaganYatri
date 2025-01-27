@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GY Explore</title>
+    <link rel="icon" href="GY favicon.png" type="png">
+    <style>
+        body{
+            background-color: black;
+            width: 100%;
+            align-content: start;
+            justify-content: center;
+            align-items: center;
+            overflow: scroll;
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            margin: auto;
+            padding: 10px 10px;
+        }
+        header{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            z-index: 5;
+            top: 0;
+        }
+        h1{
+            color: #fff;
+            justify-content: center;
+            text-align: center;
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow:    0 0 4px  #fff,      /* Slightly smaller inner bright white glow */
+                            0 0 8px  #fff,      /* Reduced medium white glow */
+                            0 0 16px #ffd700,  /* Smaller golden yellow glow */
+                            0 0 24px #ffd700,  /* Reduced golden yellow outer glow */
+                            0 0 32px #ff8c00,  /* Softer orange outermost glow */
+                            0 0 40px #ff8c00;  /* Shortened faint orange glow */
+                            
+        }
+        .button-container{
+            align-items: center;
+            justify-content: center;
+        }
+        button {
+            border-radius: 45px;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .Adventures, .Spacecrafts, .Launchsites{
+            background-color: rgba(217, 217, 217, 0.15); 
+            margin-top: 200px;
+            max-width:95%;
+            margin-bottom: 10px;
+            border-radius: 45px;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            padding: 10px 10px;
+            
+            
+        }
+        h2 {
+            color: white;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            
+        }
+        .Adventure, .Spacecraft, .Launchsite{
+            background-color: rgba(217, 217, 217, 0.15); 
+            color: white;
+            border-radius: 45px;
+            margin-top: 10px;
+            max-width: 95%;
+            padding: 10px 10px;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box; 
+            padding: 10px;
+            flex-wrap: wrap;
+            
+        } 
+        .top {
+            display: flex; /* Enable flexbox for side-by-side alignment */
+            align-items: center; /* Align items vertically in the center */
+            justify-content: space-between; /* Add space between the video and paragraph */
+            gap: 10px; /* Optional: Add some spacing between items */
+        }
+        .top-left-video {
+            border-radius: 45px;
+            margin-top: 5px;
+            margin-left: 5px;
+            max-width: 60%;
+        }
+        .top-right-paragraph{
+            font-size: large;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bolder;
+            font-style: oblique;
+        }
+        .middle-paragraph{
+            font-size: medium;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            font-style: oblique;
+        }
+        .bottom{
+            display: flex; /* Enable flexbox for side-by-side alignment */
+            gap: 10px; /* Optional: Add some spacing between items */
+            align-items: center;
+            justify-content: center;
+        }
+        .bottom-left-paragraph{
+            font-size: large;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bolder;
+            font-style: oblique;
+        }
+        .bottom-right-video{
+            position: relative;
+            float: right;
+            border-radius: 45px;
+            margin-bottom: 5px;
+            margin-right: 5px;
+            max-width: 60%;
+        }
+        footer{
+            background-color:black;
+            border-radius: 45px;
+            min-width: 95%;
+            margin-top: 5%;
+            margin-bottom: 2%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: center;
+            color: white;
+            box-shadow: 0 0 4px  #fff,      /* Slightly smaller inner bright white glow */
+                        0 0 8px  #fff,      /* Reduced medium white glow */
+                        0 0 16px #ffd700,  /* Smaller golden yellow glow */
+                        0 0 24px #ffd700,  /* Reduced golden yellow outer glow */
+                        0 0 32px #ff8c00,  /* Softer orange outermost glow */
+                        0 0 40px #ff8c00;  /* Shortened faint orange glow */;
+        }
+        .first{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-left: 5%;
+            padding: 10px;
+        }
+        .second{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        
+            padding: 10px;
+        }
+        .third{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-right: 5%;
+            padding: 10px;
+        }
+        .email ,.mobile_no, .address {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            margin-left: 5%;
+        }
+    </style>
+    <script>
+        const jumpToAdventures = (adventures) => window.scrollTo({ top: document.getElementById("adventures").offsetTop - 200, behavior: 'smooth' });
+        const jumpToSpacecrafts = (spacecrafts) => window.scrollTo({ top: document.getElementById("spacecrafts").offsetTop - 200, behavior: 'smooth' });
+        const jumpToLaunchsites = (launchsites) => window.scrollTo({ top: document.getElementById("launchsites").offsetTop - 200, behavior: 'smooth' });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Explore Different Trajectories</h1>
+        <div class="button-container">
+            <button class="botton" onclick="jumpToAdventures()">Adventure </button>
+            <button class="botton" onclick="jumpToSpacecrafts()">Spacecraft</button>
+            <button class="botton" onclick="jumpToLaunchsites()">Launchsite</button>
+        </div>
+    </header>
+    <section id="adventures" class="Adventures" >
+        <h2>Adventures</h2>
+        <div class="Adventure" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+            <div clsss="bottom">
+                <video class="bottom-right-video" src="AHR1.mp4" autoplay loop muted></video>
+                <p class="bottom-left-paragraph">
+                    this is the paragraph about adventure Lorem ipsum dolor, sit 
+                    amet consectetur adipisicing elit. Facere, quia.
+                </p>
+            </div>
+        </div>
+        <div class="Adventure" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+            <div clsss="bottom">
+                <video class="bottom-right-video" src="AHR1.mp4" autoplay loop muted></video>
+                <p class="bottom-left-paragraph">
+                    this is the paragraph about adventure Lorem ipsum dolor, sit 
+                    amet consectetur adipisicing elit. Facere, quia.
+                </p>
+            </div>
+        </div>
+        <div class="Adventure" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+            <div clsss="bottom">
+                <video class="bottom-right-video" src="AHR1.mp4" autoplay loop muted></video>
+                <p class="bottom-left-paragraph">
+                    this is the paragraph about adventure Lorem ipsum dolor, sit 
+                    amet consectetur adipisicing elit. Facere, quia.
+                </p>
+            </div>
+        </div>
+        <div class="Adventure" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+            <div clsss="bottom">
+                <video class="bottom-right-video" src="AHR1.mp4" autoplay loop muted></video>
+                <p class="bottom-left-paragraph">
+                    this is the paragraph about adventure Lorem ipsum dolor, sit 
+                    amet consectetur adipisicing elit. Facere, quia.
+                </p>
+            </div>
+        </div>
+        <div class="Adventure" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+            <div clsss="bottom">
+                <video class="bottom-right-video" src="AHR1.mp4" autoplay loop muted></video>
+                <p class="bottom-left-paragraph">
+                    this is the paragraph about adventure Lorem ipsum dolor, sit 
+                    amet consectetur adipisicing elit. Facere, quia.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="spacecrafts" class="Spacecrafts" >
+        <h2>Spacecrafts</h2>
+        <div class="Spacecraft" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your 
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+        </div>
+        <div class="Spacecraft" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your 
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+        </div>
+        <div class="Spacecraft" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your 
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="launchsites" class="Launchsites" >
+        <h2>Launchsites</h2>
+        <div class="Launchsite" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your 
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+        </div>
+        <div class="Launchsite" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your 
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+        </div>
+        <div class="Launchsite" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your 
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+        </div>
+        <div class="Launchsite" >
+            <div class="top">
+                <video class="top-left-video" src="AVT1.mp4" autoplay loop muted></video>
+                <p class="top-right-paragraph">
+                    View of Earth and Moon 100km Above Lorem ipsum dolor sit amet, 
+                    consectetur adipisicing elit. A sit in provident harum animi 
+                    nesciunt corporis fugit itaque alias enim?
+                </p>
+            </div>
+            <div class="Middle">
+                <p class="middle-paragraph">
+                    Imagine a journey where gravity becomes a distant memory, and 
+                    the stars aren't just specks in the sky but companions on your 
+                    voyage. Space travel isn't just a scientific milestone; it’s 
+                    the ultimate adventure for humanity, pushing the boundaries of 
+                    what we know and what we dare to explore.
+                </p>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="first">
+            <div class="email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-envelope" viewBox="0 0 16 16">
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                </svg>
+                <a href="mailto:dineshingale2003@gmail.com" style="color: white; text-decoration: none;"><h3>Email</h3></a>
+
+            </div>
+            <div class="mobile_no">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-telephone" viewBox="0 0 16 16">
+                    <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                </svg>
+                <a href="tel:+918999577533"  style="color: white; text-decoration: none;"><h3>Phone</h3></a>
+            </div>
+            <div class="address">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-building" viewBox="0 0 16 16">
+                    <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                    <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3z"/>
+                </svg>
+                <a href="https://maps.app.goo.gl/LBtX6cYfVk4cjfHN9" target="_blank"  style="color: white; text-decoration: none;"><h3>Address</h3></a>
+            </div>
+        </div>
+        <div class="second">
+            <h3>Book Now</h3>
+        </div>
+        <div class="third">
+            <h3>Home Page</h3>
+        </div>
+    </footer>
+</body>
+</html>

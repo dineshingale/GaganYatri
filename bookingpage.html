@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GY Booking</title>
+    <link rel="icon" href="GY favicon.png" type="png">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: white;
+            position: relative;
+        }
+        h1 {
+            font-size: 3rem;
+            text-shadow: 0 0 15px white;
+            margin: 0;
+            padding: 1.5rem 0 0;
+            text-align: center;
+        }
+        .main-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .main-buttons button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            color: #000;
+            background: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .main-buttons button:hover {
+            transform: scale(1.1);
+        }
+        .popup-buttons {
+            position: absolute;
+            top: 100%; /* Adjusted for spacing */
+            left: 5%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            visibility: hidden;
+        }
+        .popup-buttons button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            color: #fff;
+            background: #333;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .popup-buttons button:hover {
+            transform: scale(1.05);
+            background: #555;
+        }
+        .show {
+            visibility: visible;
+        }
+        .content-area {
+            margin-top: 2rem;
+            margin-left: 20%;
+            padding: 1rem;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 5px;
+            width: 60%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .content-area p {
+            margin: 1rem 0;
+        }
+        .content-area video {
+            width: 100%;
+            height: auto;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function showButtons(category) {
+            const allPopups = document.querySelectorAll('.popup-buttons');
+            allPopups.forEach(popup => popup.classList.remove('show'));
+            document.getElementById(category).classList.add('show');
+        }
+
+        function showContent(type) {
+            const contentArea = document.getElementById('content-area');
+            let content = '';
+
+            switch (type) {
+                case 'A1': case 'A2': case 'A3': case 'A4': case 'A5': case 'A6':
+                    content = `
+                        <p>Paragraph 1 about Adventure ${type}</p>
+                        <video src="adventure${type}.mp4" controls></video>
+                        <p>Paragraph 2 about Adventure ${type}</p>
+                        <video src="adventure${type}_extra.mp4" controls></video>
+                        <p>Final thoughts on Adventure ${type}</p>
+                    `;
+                    break;
+                case 'V1': case 'V2': case 'V3':
+                    content = `
+                        <p>Introduction to Vehicle ${type}</p>
+                        <video src="vehicle${type}.mp4" controls></video>
+                        <p>Details about Vehicle ${type}</p>
+                    `;
+                    break;
+                case 'S1': case 'S2': case 'S3':
+                    content = `
+                        <video src="site${type}.mp4" controls></video>
+                        <p>Description of Launch Site ${type}</p>
+                    `;
+                    break;
+                default:
+                    content = '<p>No content available.</p>';
+            }
+
+            contentArea.innerHTML = content;
+        }
+    </script>
+</head>
+<body>
+    <h1>Explore the Different Trajectories</h1>
+    <div class="main-buttons">
+        <button onclick="showButtons('adventures')">Adventures</button>
+        <button onclick="showButtons('vehicles')">Vehicles</button>
+        <button onclick="showButtons('sites')">Sites</button>
+    </div>
+
+    <div id="adventures" class="popup-buttons">
+        <button onclick="showContent('A1')">A1</button>
+        <button onclick="showContent('A2')">A2</button>
+        <button onclick="showContent('A3')">A3</button>
+        <button onclick="showContent('A4')">A4</button>
+        <button onclick="showContent('A5')">A5</button>
+        <button onclick="showContent('A6')">A6</button>
+    </div>
+
+    <div id="vehicles" class="popup-buttons">
+        <button onclick="showContent('V1')">V1</button>
+        <button onclick="showContent('V2')">V2</button>
+        <button onclick="showContent('V3')">V3</button>
+    </div>
+
+    <div id="sites" class="popup-buttons">
+        <button onclick="showContent('S1')">S1</button>
+        <button onclick="showContent('S2')">S2</button>
+        <button onclick="showContent('S3')">S3</button>
+    </div>
+
+    <div id="content-area" class="content-area">
+        <p>Click on a sub-button to display content here.</p>
+    </div>
+</body>
+</html>
