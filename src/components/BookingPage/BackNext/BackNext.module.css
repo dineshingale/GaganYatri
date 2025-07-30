@@ -1,0 +1,22 @@
+.back-next {
+    justify-self: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 10px;
+    padding-bottom: 25px;
+    
+}
+
+.back-next button {
+    padding: 10px 20px;
+    border-radius: 45px;
+    background-color: #242424;
+    color: white;
+    box-shadow:    0 0 4px  #ffd700,      /* Slightly smaller inner bright white glow */
+                   0 0 8px  #ffd700,
+                   0 0 12px #ffd700      /* Reduced medium white glow */     
+                   
+}

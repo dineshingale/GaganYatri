@@ -1,0 +1,39 @@
+.bookingpage {
+    background: black;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 100% ;
+    
+}
+
+.select-option {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    align-items: center;
+    justify-content: center;
+    max-width: 95%;
+}
+
+.form_templete,
+.passenger_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    background-color: #242424;
+    border-radius: 45px;
+    padding: 0 20px;
+    padding-bottom: 5px;
+    z-index: 2;
+    min-width: 500px;
+}
+
+@media screen and (max-width: 700px) {
+    .form_templete {
+        min-width: 320px;
+    }
+}

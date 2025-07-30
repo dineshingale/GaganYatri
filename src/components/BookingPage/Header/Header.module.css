@@ -1,0 +1,51 @@
+.header{
+    max-width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Times New Roman';
+    font-weight: bolder;
+    align-content: space-evenly;
+}
+.header h1{
+    padding: 1.5%;
+    color: #fff;
+    justify-content: center;
+    font-family: 'Times New Roman';
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bolder;
+    text-shadow:    0 0 4px  #fff,      /* Slightly smaller inner bright white glow */
+                    0 0 8px  #fff,      /* Reduced medium white glow */
+                    0 0 16px #ffd700,  /* Smaller golden yellow glow */
+                    0 0 24px #ffd700,  /* Reduced golden yellow outer glow */
+                    0 0 32px #ff8c00,  /* Softer orange outermost glow */
+                    0 0 40px #ff8c00;  /* Shortened faint orange glow */
+                    
+}
+.header h2{
+    padding: 1%;
+    color: #fff;
+    text-shadow: 0 0 20px #fff;
+    font-size: 1.5rem;
+}
+.header h3{
+    font-size: 1.2rem;
+    color: #fff;
+    text-shadow: 0 0 10px #fff;
+}
+
+@media screen and (max-width: 700px) {
+    .header h1 {
+        font-size: 3rem;
+        padding: 5%;
+    }
+    .header h2 {
+        font-size: 1.2rem;
+    }
+    .header h3 {
+        font-size: 1rem;
+        padding: 5%;
+    }
+}

@@ -1,0 +1,17 @@
+.select-option {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  align-items: center;
+  justify-content: center;
+  max-width: 95%;
+  margin: 20px 0;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 700px) {
+  .select-option {
+    padding: 10px;
+    width: 100%;
+  }
+}

@@ -1,0 +1,230 @@
+.passengers {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0; /* Consistent vertical padding */
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+}
+
+/* Passenger list container */
+.passenger_list{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  border: 1px solid white;
+  border-radius: 45px;
+  padding: 10px;
+  max-width: 1200px;
+  gap: 10px;
+}
+
+.head3 {
+  margin: 0 0 30px 0; /* 0 top, 30px bottom, 0 left/right */
+  padding: 0;
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+/* Scrollbar styling */
+.passenger_list::-webkit-scrollbar{
+
+  display: none;
+}
+
+/* Hide scrollbar when not needed */
+.passenger_list::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+/* Form template styles */
+.form_templete{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #242424;
+  border-radius: 45px;
+  padding: 3%;
+  min-width: 500px;
+  max-width: 500px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+/* Passenger header/count */
+.passenger_count {
+  padding: 2%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+
+
+/* Form field containers */
+.strip_outer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #343434;
+  border-radius: 45px;
+  padding: 7px;
+  margin-bottom: 15px;
+  justify-content: space-between;
+
+}
+
+/* Form input fields */
+.strip_inner{
+  background-color: #000;
+  border-radius: 45px;
+  padding: 5px;
+  width: 90%;
+  color: white;
+  font-size: medium;
+  
+}
+
+/* Glow effects */
+.border_glow_stage1{
+  justify-items: center;
+  align-items: center;
+  border-radius: 45px;
+  border-style: solid;
+  border-color: #343434;
+  box-shadow: 0 0 1px #fff,
+              0 0 2px #fff,
+              0 0 3px #ffd700,
+              0 0 4px #ffd700,
+              0 0 5px #ff8c00,
+              0 0 6px #ff8c00;
+}
+
+.border_glow_stage2{
+  border-style: solid;
+  border-color: #343434;
+  box-shadow: 0 0 1px #fff,
+              0 0 1.5px #fff,
+              0 0 2px #ffd700,
+              0 0 2.5px #ffd700,
+              0 0 3px #ff8c00,
+              0 0 3.5px #ff8c00;
+}
+
+/* Gender options */
+.gender_options {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 15px;
+  color: white;
+  font-size: medium;
+}
+
+.gender_options label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.leader_selection label {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-radius: 45px;
+  font-weight: bold;
+  padding: 1%;
+  
+  justify-items:space-evenly;
+  align-items: center;
+  border-radius: 45px;
+  border-style: solid;
+  border-color: #343434;
+  box-shadow: 0 0 1px #fff,
+              0 0 2px #fff,
+              0 0 3px #ffd700,
+              0 0 4px #ffd700,
+              0 0 5px #ff8c00,
+              0 0 6px #ff8c00;
+}
+.leader_selection label h4 {
+  width: 100%;
+  padding: 1%;
+  color: white;
+}
+
+/* Leader details section */
+.leader_details {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+/* Button controls */
+.passenger_controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.buttonLabel {
+  display: inline;
+}
+
+.submit_button {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Button styles */
+button {
+  padding: 10px 20px;
+  border-radius: 45px;
+  background-color: #242424;
+  color: white;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.remove_button {
+  padding: 5px 10px;
+  background: transparent;
+}
+
+/* Input fields */
+input {
+  
+  color: #fff;
+  font-size: medium;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: large;
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 700px) {
+  .form_templete,
+  .passenger_form {
+    min-width: 320px;
+  }
+  
+  .passenger_list,
+  #passenger_list {
+    max-width: 350px;
+  }
+
+  .buttonLabel {
+  display: none;
+  }
+}

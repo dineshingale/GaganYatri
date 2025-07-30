@@ -1,0 +1,37 @@
+.homepage {
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow-x: hidden;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    width: 100% ;
+}
+
+@media screen and (max-width: 700px) {
+    header h1 {
+        font-size: 3rem;
+    }
+    header p {
+        font-size: 1.2rem;
+    }
+    header .button-group {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+    header button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    .card_list{
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+    }
+    .card{
+        min-width: 92%;
+    }
+    .card ul{
+        padding: 10px 10px;
+    }
+}

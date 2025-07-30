@@ -1,0 +1,88 @@
+/* BookingConfirmation.module.css */
+.confirmationContainer {
+  width: 100%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #ffd700;
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+  border-style: solid;
+  box-shadow: 0 0 2px #fff,
+                0 0 4px #fff,
+                0 0 6px #ffd700,
+                0 0 8px #ffd700,
+                0 0 10px #ff8c00,
+                0 0 12px #ff8c00;
+}
+
+.confirmationTitle {
+    color: #fff;
+    justify-content: center;
+    font-family: 'Times New Roman';
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
+    text-shadow:    0 0 4px  #fff,      /* Slightly smaller inner bright white glow */
+                    0 0 8px  #fff,      /* Reduced medium white glow */
+                    0 0 16px #ffd700,  /* Smaller golden yellow glow */
+                    0 0 24px #ffd700,  /* Reduced golden yellow outer glow */
+                    0 0 32px #ff8c00,  /* Softer orange outermost glow */
+                    0 0 40px #ff8c00;  /* Shortened faint orange glow */
+}
+
+.tripDetails, .passengerDetails {
+  background:#202020;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.tripDetails h2, .passengerDetails h2 {
+  color: #ffd700;
+  border-bottom: 1px solid #ffd700;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tripDetails p {
+  font-size: 1.1rem;
+  margin: 0.8rem 0;
+}
+
+.tripDetails span {
+  color: #ffd700;
+  font-weight: bold;
+  display: inline-block;
+  width: 120px;
+}
+
+.leaderInfo, .companionInfo {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.leaderInfo h3, .companionInfo h3 {
+  color: #ffd700;
+  margin-bottom: 0.5rem;
+}
+
+.companionInfo ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.companionInfo li {
+  padding: 0.3rem 0;
+  border-bottom: 1px dotted #444;
+}
+
+.confirmationMessage {
+  margin-top: 2rem;
+  font-style: italic;
+  line-height: 1.6;
+}

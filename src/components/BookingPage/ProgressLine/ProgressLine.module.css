@@ -1,0 +1,66 @@
+.progress-line {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 20%;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.point-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 20px;
+  height: 20px;
+  background-color: orange;
+  border-radius: 50%;
+}
+
+.line {
+  display: flex;
+  width: 10%;
+  height: 5px;
+  background-color: white; /* Keep original white color */
+  border-radius: 45px;
+}
+
+.point-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 17px;
+  height: 17px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.point-inner-inner {
+  width: 13px;
+  height: 13px;
+  background-color: black; /* Default color for incomplete steps */
+  border-radius: 50%;
+  align-self: center;
+}
+
+.solid-dot {
+  background-color: darkorange !important; /* Completed steps */
+}
+
+.blink {
+  background-color: orange !important; /* Current step */
+  box-shadow: 0 0 20px 10px orange;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
