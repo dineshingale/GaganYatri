@@ -1,10 +1,34 @@
-Gaganyatri is space adventure booking website that offers six diffrent adventures in the outer space with three diffrent spacecrafts launching from four different launchsites means each thier are 72 diffrent ways you can book an space adventure and enjoy unique experince
-#BookingWebsite#SpaceAdventure#MERN-Stack#CSS5#NodeMailer#Guided-Navigation#UserFlow
+# GaganYatri 🚀
 
-Tech stack used
-Frontend: React, javascript, , MongoDB, CSS5,
-Backend: Node.js, Express.js, Nodemailer
-Database: MonogoDB 
-Deployment: Render and vercel 
+**GaganYatri** is a space adventure booking website that offers six unique outer space adventures. Users can choose from three different spacecraft, launching from four distinct launch sites — offering **72 possible combinations** for a truly customizable and unforgettable space experience!
 
-live Website link
+## Live Website
+- Frontend: [https://gaganyatri.vercel.app](https://gaganyatri.vercel.app)
+- Backend (API): [https://gaganyatri-server.onrender.com](https://gaganyatri-server.onrender.com)
+
+## Tech Stack
+
+**Frontend**  
+- React  
+- JavaScript  
+- CSS Modules  
+
+**Backend**  
+- Node.js  
+- Express.js  
+- Nodemailer  
+
+**Database**  
+- MongoDB  
+
+**Deployment**  
+- Vercel (Frontend)  
+- Render (Backend)  
+
+## Features
+- Dynamic booking system (72 combinations)
+- Email confirmation with NodeMailer
+- Guided navigation and smooth user flow
+
+## 🔖 Tags
+`#BookingWebsite` `#SpaceAdventure` `#MERN-Stack` `#NodeMailer` `#React` `#MongoDB`
