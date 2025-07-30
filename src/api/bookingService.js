@@ -1,5 +1,6 @@
 // src/api/bookingService.js
-const API = process.env.API_URL;
+const API = process.env.REACT_APP_API_URL;
+
 export const saveBookingToDatabase = async (bookingData) => {
   try {
     // The endpoint should match your server's router setup.
