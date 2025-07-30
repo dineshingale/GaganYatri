@@ -1,9 +1,10 @@
 // src/api/bookingService.js
+const API = process.env.API_URL;
 export const saveBookingToDatabase = async (bookingData) => {
   try {
     // The endpoint should match your server's router setup.
     // Assuming your server uses this file for the '/api/booking' route.
-    const response = await fetch('/api/booking', {
+    const response = await fetch(`${API}/api/booking`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
