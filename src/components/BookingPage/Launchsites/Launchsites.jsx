@@ -12,8 +12,8 @@ const Launchsites = ({ onSelect, selectedId }) => {
 
   const launchsites = [
     { id: 10, title: "Chennai, India", image: "launchsite1.webp" },
-    { id: 11, title: "San Francisco, USA", image: "launchsite2.webp" },
-    { id: 12, title: "Monaco, Europe", image: "launchsite3.webp" },
+    { id: 11, title: "Monaco, Europe", image: "launchsite2.webp" },
+    { id: 12, title: "San Francisco, USA", image: "launchsite3.webp" },
     { id: 13, title: "Tokyo, Japan", image: "launchsite4.webp" }
   ];
 
