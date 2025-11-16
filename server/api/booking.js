@@ -1,8 +1,9 @@
 // server/api/booking.js
 import express from 'express';
 import { MongoClient } from 'mongodb';
-import nodemailer from 'nodemailer';
+import sgMail from '@sendgrid/mail'; // Import SendGrid instead of Nodemailer
 import { EmailTemplate } from './EmailTemplate.js';
+
 
 const router = express.Router();
 
@@ -36,28 +37,26 @@ router.post('/', async (req, res) => {
         await bookings.insertOne(bookingData);
         console.log("Booking saved to database.");
     
-        // 3. Configure and Send Email
-        const transporter = nodemailer.createTransport({
-            service: process.env.EMAIL_SERVICE,
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASSWORD,
-            },
-        });
-        
+        // 3. Configure and Send Email using SendGrid
         const emailHtml = EmailTemplate(bookingData);
-        await transporter.sendMail({
-            from: process.env.EMAIL_FROM,
+        const msg = {
             to: leader.email,
+            from: process.env.EMAIL_FROM, // This MUST be a verified sender in your SendGrid account
             subject: 'Your Space Adventure Booking Confirmation',
             html: emailHtml,
-        });
-        console.log(`Confirmation email sent to ${leader.email}.`);
+        };
+        
+        await sgMail.send(msg);
+        console.log(`Confirmation email sent to ${leader.email} via SendGrid.`);
         
         res.status(201).json({ success: true, message: 'Booking confirmed!' });
 
     } catch (error) {
         console.error('Booking process failed:', error);
+        // Add more detailed error logging for SendGrid
+        if (error.response) {
+            console.error('SendGrid Error Body:', error.response.body)
+        }
         res.status(500).json({ error: 'Failed to complete booking' });
     } finally {
         // 4. IMPORTANT: Ensure the client connection is closed

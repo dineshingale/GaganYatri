@@ -7,6 +7,15 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import bookingRouter from './api/booking.js';
+import sgMail from '@sendgrid/mail'; // **NEW IMPORT**
+
+// **NEW: Set SendGrid API Key after environment variables are loaded**
+if (process.env.SENDGRID_API_KEY) {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    console.log("SendGrid API Key set successfully.");
+} else {
+    console.error("FATAL ERROR: SENDGRID_API_KEY is not defined.");
+}
 
 // Create the Express app
 const app = express();

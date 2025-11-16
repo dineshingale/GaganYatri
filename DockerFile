@@ -1,0 +1,14 @@
+# // sample Dockerfile for a React application
+
+    # Example Dockerfile for a React app
+    FROM node:alpine
+    WORKDIR /app
+    COPY package.json ./
+    RUN npm install
+    COPY . ./
+    RUN npm run build
+    EXPOSE 3000
+    CMD ["npm", "start"]
+
+
+# create jenkins pipeline jon on interface
