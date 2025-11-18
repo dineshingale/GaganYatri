@@ -15,14 +15,12 @@ pipeline {
         stage('Selenium Tests') {
             steps {
                 script {
-                    // Replace C:\Your\Path\To\python.exe with the actual path you found!
-                def PYTHON_EXEC = 'C:\\Users\\babal\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe' 
-                
-                // 1. Install Selenium using the full path
-                bat "${PYTHON_EXEC} -m pip install selenium" 
-                
-                // 2. Run the Python script using the full path
-                bat "${PYTHON_EXEC} \"tests/E2E Selenium tests/login.py\""
+                    // CHANGE 1: Use 'python -m pip' instead of just 'pip'
+                    // This asks the python executable to run the pip module
+                    bat 'python -m pip install selenium' 
+                    
+                    // CHANGE 2: Ensure we use 'python' (not python3) for Windows
+                    bat 'python "tests/E2E Selenium tests/login.py"'
                 }
             }
         }
