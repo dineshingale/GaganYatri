@@ -8,21 +8,18 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                // This checks if your MERN app code is valid and can install packages
                 bat 'npm install' 
             }
         }
 
-        // REMOVED: stage('Build Docker Image') 
-
         stage('Selenium Tests') {
             steps {
                 script {
-                    // 1. Install Selenium
-                    bat 'pip install selenium' 
+                    // CHANGE 1: Use 'python -m pip' instead of just 'pip'
+                    // This asks the python executable to run the pip module
+                    bat 'python -m pip install selenium' 
                     
-                    // 2. Run the Python script
-                    // Assuming you updated login.py to be "headless" as discussed!
+                    // CHANGE 2: Ensure we use 'python' (not python3) for Windows
                     bat 'python "tests/E2E Selenium tests/login.py"'
                 }
             }
