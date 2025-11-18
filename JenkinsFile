@@ -1,26 +1,21 @@
 pipeline {
     agent any
-
-    tools {
-        nodejs 'node' 
-    }
-
+    
     stages {
-        stage('Install Dependencies') {
+        stage('Build Docker Image') {
             steps {
-                bat 'npm install' 
+                script {
+                    // Build the image containing all dependencies (Node, Python, Selenium)
+                    sh 'docker build -t gaganyatri-test-app -f DockerFile .'
+                }
             }
         }
 
-        stage('Selenium Tests') {
+        stage('Run Selenium Tests') {
             steps {
                 script {
-                    // CHANGE 1: Use 'python -m pip' instead of just 'pip'
-                    // This asks the python executable to run the pip module
-                    bat 'python -m pip install selenium' 
-                    
-                    // CHANGE 2: Ensure we use 'python' (not python3) for Windows
-                    bat 'python "tests/E2E Selenium tests/login.py"'
+                    // Run the tests inside the container
+                    sh 'docker run --rm -v $(pwd)/tests:/app/tests gaganyatri-test-app python /app/tests/E2E\ Selenium\ tests/login.py'
                 }
             }
         }

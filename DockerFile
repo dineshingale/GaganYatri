@@ -1,14 +1,21 @@
-# // sample Dockerfile for a React application
+# Example Dockerfile - You will build on a base image
+FROM node:18-alpine 
 
-    # Example Dockerfile for a React app
-    FROM node:alpine
-    WORKDIR /app
-    COPY package.json ./
-    RUN npm install
-    COPY . ./
-    RUN npm run build
-    EXPOSE 3000
-    CMD ["npm", "start"]
+# Install Python and pip (Required for Selenium)
+RUN apk add --no-cache python3 py3-pip 
 
+# Set working directory
+WORKDIR /app
 
-# create jenkins pipeline jon on interface
+# Copy package files and install Node dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy application code
+COPY . .
+
+# Install Python dependencies (Selenium)
+RUN pip install selenium msedgedriver # msedgedriver might need special installation
+
+# You can define the entrypoint to run your tests here, or run them from Jenkins
+# ENTRYPOINT ["/bin/sh"]
