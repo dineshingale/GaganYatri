@@ -1,43 +1,31 @@
-// sample jenkins file for defining teh cICD pipeline stages
+pipeline {
+    agent any
 
-    // Example Jenkinsfile
-    pipeline {
-        agent any
-        tools {
-            nodejs 'node' // Configure Node.js in Jenkins Global Tool Configuration
+    tools {
+        nodejs 'node' 
+    }
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                // This checks if your MERN app code is valid and can install packages
+                bat 'npm install' 
+            }
         }
-        stages {
-            stage('Checkout') {
-                steps {
-                    git 'https://github.com/your-username/your-repo.git' // Replace with your repo URL
-                }
-            }
-            stage('Build Docker Image') {
-                steps {
-                    script {    
-                        sh 'dock    er build -t my-react-app .'
-                    }   
-                }
-            }
-            stage('Unit Tests') {
-                steps {
-                    sh 'npm test' // Assuming your package.json has a "test" script for unit tests
-                }
-            }
-            stage('Selenium E2E Tests') {
-                steps {
-                    script {
-                        // Run your Selenium tests within a Docker container or on a dedicated Selenium Grid
-                        sh 'docker run --rm -v $(pwd)/tests/e2e/selenium_tests:/app/tests/e2e/selenium_tests selenium/standalone-chrome:latest node /app/tests/e2e/selenium_tests/login.js' // Example
-                    }
-                }
-            }
-            stage('Deploy') {
-                steps {
-                    // Deployment steps (e.g., push Docker image to a registry, deploy to a server)
-                    sh 'docker push your-docker-registry/my-react-app:latest'
-                    // Add deployment commands for your specific environment
+
+        // REMOVED: stage('Build Docker Image') 
+
+        stage('Selenium Tests') {
+            steps {
+                script {
+                    // 1. Install Selenium
+                    bat 'pip install selenium' 
+                    
+                    // 2. Run the Python script
+                    // Assuming you updated login.py to be "headless" as discussed!
+                    bat 'python "tests/E2E Selenium tests/login.py"'
                 }
             }
         }
     }
+}

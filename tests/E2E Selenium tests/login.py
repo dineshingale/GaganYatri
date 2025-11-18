@@ -1,176 +1,154 @@
-import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.common.exceptions import TimeoutException
+# NOTE: If your Jenkins server is Linux, it is usually safer to use Chrome/Chromium.
+# If you stick with Edge, ensure 'msedgedriver' is installed on the Jenkins machine.
+from selenium.webdriver.edge.options import Options 
+import time
 
-# --- Setup ---
+
+edge_options = Options()
+
+# --- NEW: CRITICAL FOR JENKINS ---
+# These three lines make the browser invisible so it works on a server
+edge_options.add_argument("--headless=new") 
+edge_options.add_argument("--no-sandbox")
+edge_options.add_argument("--disable-dev-shm-usage")
+# ---------------------------------
+
+edge_options.add_argument('--ignore-certificate-errors')
+edge_options.add_experimental_option('excludeSwitches', ['enable-automation'])
+edge_options.add_experimental_option('useAutomationExtension', False)
+
+
+# Initialize the Edge WebDriver with the specified options
 # Make sure you have msedgedriver installed and in your PATH
-# or specify the path directly:
-# service = webdriver.EdgeService(executable_path='/path/to/msedgedriver')
-# driver = webdriver.Edge(service=service)
+# or specify the path to it.
+driver = webdriver.Edge(options=edge_options)
 
-driver = webdriver.Edge()
-driver.maximize_window()    
-    
-# Set up a 20-second explicit wait
-wait = WebDriverWait(driver, 20)
+# --- Hide the "navigator.webdriver" flag from the website ---
+driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
-# Set up ActionChains for scrolling
-actions = ActionChains(driver)
-
-print("Starting the Gaganyatri booking test...")
 
 try:
-    # 1. Open https://gaganyatri.vercel.app/book-now
-    print("1. Opening the website...")
-    driver.get("https://gaganyatri.vercel.app/book-now")
+    # 1. Open the website
+    print("Opening gaganyatri.vercel.app/book-now...")
+    driver.get('https://gaganyatri.vercel.app/book-now')
+    
+    # Give the page a moment for initial scripts to load
+    time.sleep(2)
 
-    # 2. wait until "view from 100km above" element comes in viewport
-    print("2. Waiting for 'view from 100km above'...")
-    wait.until(EC.visibility_of_element_located(
-        (By.XPATH, "//h1[contains(text(), 'view from 100km above')]")
-    ))
+    # --- Wait for a stable element that appears before the trip options ---
+    wait = WebDriverWait(driver, 30)
+    wait.until(EC.presence_of_element_located((By.XPATH, "//*[text()='Select Adventure']")))
+    print("Website opened and main content area has loaded successfully.")
 
-    # 3. Scroll until "Trip to mars" comes in viewport
-    print("3. Scrolling to 'Trip to mars'...")
-    mars_trip_element = wait.until(EC.presence_of_element_located(
-        (By.XPATH, "//h1[text()='Trip to mars']")
-    ))
-    actions.move_to_element(mars_trip_element).perform()
-    wait.until(EC.visibility_of(mars_trip_element)) # Ensure it's visible after scroll
+    # 2. Wait for the site to load, scroll to, and click "Trip to Mars"
+    print("Waiting for 'Trip to Mars' button...")
+    trip_to_mars_element = driver.find_element(By.XPATH, "//*[text()='Trip to Mars']")
+    
+    # Use JavaScript to scroll the element into view
+    driver.execute_script("arguments[0].scrollIntoView({block: 'center', inline: 'center'});", trip_to_mars_element)
+    print("Scrolled to 'Trip to Mars'.")
+    
+    # Add a brief pause for any on-scroll animations to complete
+    time.sleep(1)
+    
+    # 3. Click on the PARENT of "Trip to Mars" using JavaScript
+    # This is more robust as it doesn't require finding a second element.
+    driver.execute_script("arguments[0].parentElement.click();", trip_to_mars_element)
+    print("Clicked 'Trip to Mars'.")
 
-    # 4. click on "Trip to mars" which is h1 heading
-    print("4. Clicking 'Trip to mars'...")
-    mars_click_element = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//h1[text()='Trip to mars']")
-    ))
-    mars_click_element.click()
+    # 4. Wait for the next page and "Falcon"
+    print("Waiting for 'Falcon' button...")
+    falcon_element = wait.until(EC.presence_of_element_located((By.XPATH, "//*[text()='Falcon']")))
+    
+    # 5. Click on the PARENT of "Falcon" using JavaScript
+    driver.execute_script("arguments[0].parentElement.click();", falcon_element)
+    print("Clicked 'Falcon'.")
 
-    # 5. wait until "starship" element comes in viewport
-    print("5. Waiting for 'starship'...")
-    wait.until(EC.visibility_of_element_located(
-        (By.XPATH, "//h1[text()='starship']")
-    ))
+    # 6. Wait for the next page and "Chennai, India"
+    print("Waiting for 'Chennai, India' button...")
+    chennai_element = wait.until(EC.presence_of_element_located((By.XPATH, "//*[text()='Chennai, India']")))
 
-    # 6. Scroll until "falcon" comes in viewport
-    print("6. Scrolling to 'falcon'...")
-    falcon_element = wait.until(EC.presence_of_element_located(
-        (By.XPATH, "//h1[text()='falcon']")
-    ))
-    actions.move_to_element(falcon_element).perform()
-    wait.until(EC.visibility_of(falcon_element))
+    # 7. Click on the PARENT of "Chennai, India" using JavaScript
+    driver.execute_script("arguments[0].parentElement.click();", chennai_element)
+    print("Clicked 'Chennai, India'.")
+   
+    wait.until(EC.presence_of_element_located((By.XPATH, "//*[text()='Trip to Mars']")))
 
-    # 7. click on "falcon" which is h1 heading
-    print("7. Clicking 'falcon'...")
-    falcon_click_element = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//h1[text()='falcon']")
-    ))
-    falcon_click_element.click()
+    # 8. Click on "Next" (wait for clickable to avoid wrong/disabled button)
+    next_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Next' and not(@disabled)]")))
+    next_button.click()
+    print("Clicked the third 'Next' button.")
 
-    # 8. wait until "Chennai, India" element comes in viewport
-    print("8. Waiting for 'Chennai, India'...")
-    wait.until(EC.visibility_of_element_located(
-        (By.XPATH, "//h1[text()='Chennai, India']")
-    ))
+    # 9. Fill the passenger form
+    print("Filling passenger form...")
+    wait.until(EC.visibility_of_element_located((By.XPATH, "//*[normalize-space()='Passenger Details']")))
+    print("Passenger form is visible.")
 
-    # 9. Scroll until "Tokyo, Japan" comes in viewport
-    print("9. Scrolling to 'Tokyo, Japan'...")
-    tokyo_element = wait.until(EC.presence_of_element_located(
-        (By.XPATH, "//h1[text()='Tokyo, Japan']")
-    ))
-    actions.move_to_element(tokyo_element).perform()
-    wait.until(EC.visibility_of(tokyo_element))
+    driver.find_element(By.XPATH, "//input[@placeholder='Enter full name']").send_keys("John Doe")
+    driver.find_element(By.XPATH, "//input[@placeholder='Enter phone number']").send_keys("1234567890")
+    driver.find_element(By.XPATH, "//input[@placeholder='Enter age']").send_keys("30")
+    # safer radio selector
+    driver.find_element(By.XPATH, "//label[contains(normalize-space(.), 'Male')]/input[@type='radio']").click()
 
-    # 10. click on "Tokyo, Japan" which is h1 heading
-    print("10. Clicking 'Tokyo, Japan'...")
-    tokyo_click_element = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//h1[text()='Tokyo, Japan']")
-    ))
-    tokyo_click_element.click()
+    checkbox_xpath = "//label[contains(normalize-space(.), 'Set them as your leader')]/input[@type='checkbox']"
+    leader_checkbox = wait.until(EC.element_to_be_clickable((By.XPATH, checkbox_xpath)))
+    leader_checkbox.click()
+    print("Checked 'Set them as your leader'.")
 
-    # 11. wait until "Trip to mars" element comes in viewport (on summary page)
-    print("11. Waiting for summary page ('Trip to mars')...")
-    # On this page, "Trip to mars" is a <p> tag
-    wait.until(EC.visibility_of_element_located(
-        (By.XPATH, "//p[text()='Trip to mars']")
-    ))
+    # Wait for the input elements (target the input placeholders directly)
+    print("Waiting for leader email field to appear...")
+    leader_email_input = wait.until(EC.visibility_of_element_located((By.XPATH, "//input[@placeholder=\"Enter leader's email\"]")))
+    leader_email_input.send_keys("dineshingale2003@gmail.com")
 
-    # 12. click on next
-    print("12. Clicking 'Next'...")
-    wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//button[text()='Next']")
-    )).click()
+    print("Waiting for leader address field to appear...")
+    leader_address_input = wait.until(EC.visibility_of_element_located((By.XPATH, "//input[@placeholder=\"Enter leader's address\"]")))
+    leader_address_input.send_keys("123 Space Lane, Cosmos City")
 
-    # 13. wait until "Passenger details" element comes in viewport
-    print("13. Waiting for 'Passenger details' form...")
-    wait.until(EC.visibility_of_element_located(
-        (By.XPATH, "//h1[text()='Passenger details']")
-    ))
+    print("Filled in all passenger details.")
 
-    # 14. fill the name
-    print("14. Filling name...")
-    wait.until(EC.visibility_of_element_located(
-        (By.XPATH, "//input[@placeholder='Name']")
-    )).send_keys("Gaganyatri User")
+    # Add a second passenger
+    print("Adding a new passenger...")
+    add_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(normalize-space(), 'Add Passenger')]")))
+    add_btn.click()
+    print("Clicked 'Add Passenger'.")
 
-    # 15. fill the Phone number
-    print("15. Filling phone number...")
-    driver.find_element(
-        By.XPATH, "//input[@placeholder='Phone number']"
-    ).send_keys("1234567890")
+    # wait for the second passenger form inputs to appear (use the last occurrence)
+    wait.until(EC.visibility_of_element_located((By.XPATH, "(//input[@placeholder='Enter full name'])[last()]")))
 
-    # 16. fill the Age
-    print("16. Filling age...")
-    driver.find_element(
-        By.XPATH, "//input[@placeholder='Age']"
-    ).send_keys("30")
+    # Fill second passenger (use the last matching inputs)
+    driver.find_element(By.XPATH, "(//input[@placeholder='Enter full name'])[last()]").send_keys("Jane Smith")
+    driver.find_element(By.XPATH, "(//input[@placeholder='Enter phone number'])[last()]").send_keys("0987654321")
+    driver.find_element(By.XPATH, "(//input[@placeholder='Enter age'])[last()]").send_keys("28")
 
-    # 17. select male as gender
-    print("17. Selecting 'Male' as gender...")
-    # Clicking the label is often more reliable than the radio button itself
-    wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//label[@for='male']")
-    )).click()
+    # Select gender for second passenger (click the last 'Female' radio if present)
+    try:
+        female_radio_last = wait.until(EC.element_to_be_clickable((By.XPATH, "(//label[contains(normalize-space(.), 'Female')]/input[@type='radio'])[last()]")))
+        female_radio_last.click()
+    except Exception:
+        # fallback: try selecting by label text directly
+        try:
+            driver.find_element(By.XPATH, "(//label[contains(normalize-space(.), 'Female')])[last()]/input").click()
+        except Exception:
+            print("Warning: Could not select 'Female' radio for second passenger.")
 
-    # 18. check the checkbox after "set them as your leader"
-    print("18. Checking 'set them as your leader'...")
-    # Find the label by its text and click it
-    leader_label = wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//label[contains(text(), 'set them as your leader')]")
-    ))
-    leader_label.click()
+    print("Second passenger details filled.")
 
-    # 19. fill email
-    print("19. Filling email...")
-    driver.find_element(
-        By.XPATH, "//input[@placeholder='Email']"
-    ).send_keys("test@example.com")
+    # 10. Click on "Submit All Passengers"
+    submit_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Submit All Passengers']")))
+    submit_btn.click()
+    print("Clicked 'Submit All Passengers'.")
 
-    # 20. fill address
-    print("20. Filling address...")
-    driver.find_element(
-        By.XPATH, "//textarea[@placeholder='Address']"
-    ).send_keys("123 Space Station, Mars")
 
-    # 21. click on "submit all passengers"
-    print("21. Clicking 'submit all passengers'...")
-    wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//button[text()='submit all passengers']")
-    )).click()
+    print("\nAutomation script finished successfully!")
 
-    print("\nTest successfully completed! Waiting 5 seconds before closing.")
-    time.sleep(5) # A brief pause to see the final result
-
-except TimeoutException:
-    print("\nTest Failed: An element was not found within the 20-second timeout.")
-except Exception as e:
-    print(f"\nTest Failed: An unexpected error occurred: {e}")
+    # Wait for a few seconds to see the result before the browser closes
+    # time.sleep(10)
 
 finally:
-    # 22. close the browser
-    print("22. Closing the browser.")
+    # Close the browser
     driver.quit()
-
+    print("Browser closed.")
