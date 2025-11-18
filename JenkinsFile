@@ -15,8 +15,7 @@ pipeline {
             steps {
                 script {
                     // Run the tests inside the container
-                    sh 'docker run --rm -v $(pwd)/tests:/app/tests gaganyatri-test-app python /app/tests/E2E\ Selenium\ tests/login.py'
-                }
+                sh 'docker run --rm -v $(pwd)/tests:/app/tests gaganyatri-test-app python /app/tests/E2E\\Selenium\\tests\\login.py'                }
             }
         }
     }
