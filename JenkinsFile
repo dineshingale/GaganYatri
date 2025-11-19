@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Build the image containing all dependencies (Node, Python, Selenium)
-                    sh 'docker build -t gaganyatri-test-app -f DockerFile .'
+                    bat 'docker build -t gaganyatri-test-app -f DockerFile .'
                 }
             }
         }
@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     // Run the tests inside the container
-                sh 'docker run --rm -v $(pwd)/tests:/app/tests gaganyatri-test-app python /app/tests/E2E\\Selenium\\tests\\login.py'                }
+                bat 'docker run --rm -v $(pwd)/tests:/app/tests gaganyatri-test-app python /app/tests/E2E\\Selenium\\tests\\login.py'                }
             }
         }
     }
