@@ -2,30 +2,33 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-# NOTE: If your Jenkins server is Linux, it is usually safer to use Chrome/Chromium.
-# If you stick with Edge, ensure 'msedgedriver' is installed on the Jenkins machine.
-from selenium.webdriver.edge.options import Options 
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import TimeoutException # Import TimeoutException
 import time
 
 
-edge_options = Options()
+chrome_options = Options()
 
-# --- NEW: CRITICAL FOR JENKINS ---
-# These three lines make the browser invisible so it works on a server
-edge_options.add_argument("--headless=new") 
-edge_options.add_argument("--no-sandbox")
-edge_options.add_argument("--disable-dev-shm-usage")
+# --- For Local Debugging: Comment this line out to see the browser ---
+# RE-ENABLE THIS LINE TO RUN HEADLESSLY
+chrome_options.add_argument("--headless=new") 
+
+# --- CRITICAL FOR JENKINS & ROBUSTNESS ---
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+# ** NEW: Set a consistent window size to avoid responsive layout issues **
+chrome_options.add_argument("--window-size=1920,1080")
 # ---------------------------------
 
-edge_options.add_argument('--ignore-certificate-errors')
-edge_options.add_experimental_option('excludeSwitches', ['enable-automation'])
-edge_options.add_experimental_option('useAutomationExtension', False)
+chrome_options.add_argument('--ignore-certificate-errors')
+chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
+chrome_options.add_experimental_option('useAutomationExtension', False)
 
 
-# Initialize the Edge WebDriver with the specified options
-# Make sure you have msedgedriver installed and in your PATH
-# or specify the path to it.
-driver = webdriver.Edge(options=edge_options)
+# Initialize the Chrome WebDriver with the specified options
+# Make sure you have chromedriver installed and in your PATH,
+# or that your Docker container has it.
+driver = webdriver.Chrome(options=chrome_options)
 
 # --- Hide the "navigator.webdriver" flag from the website ---
 driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
@@ -138,15 +141,45 @@ try:
     print("Second passenger details filled.")
 
     # 10. Click on "Submit All Passengers"
-    submit_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Submit All Passengers']")))
-    submit_btn.click()
+    submit_button_xpath = "//button[normalize-space()='Submit All Passengers']"
+    print("Waiting for the 'Submit All Passengers' button to be clickable...")
+    
+    # ** IMPROVEMENT: More robust wait and click **
+    submit_btn = wait.until(EC.element_to_be_clickable((By.XPATH, submit_button_xpath)))
+    
+    # Use a JavaScript click, which can be more reliable in headless mode
+    driver.execute_script("arguments[0].click();", submit_btn)
     print("Clicked 'Submit All Passengers'.")
 
+    # ** NEW: VERIFY THE SUBMISSION WAS SUCCESSFUL **
+    # After clicking submit, you should wait for evidence of success.
+    # This could be a "Thank You" message, a URL change, or a new element appearing.
+    # Let's assume a success message with the text "Booking confirmed!" appears.
+    print("Waiting for booking confirmation...")
+    success_message_xpath = "//*[contains(text(), 'Booking Confirmation')]"
+    wait.until(EC.visibility_of_element_located((By.XPATH, success_message_xpath)))
+    
+    print("\n✅ SUCCESS: Booking confirmation message appeared!")
+    print("Automation script finished successfully!")
 
-    print("\nAutomation script finished successfully!")
 
-    # Wait for a few seconds to see the result before the browser closes
-    # time.sleep(10)
+except TimeoutException as e:
+    # ** NEW: DEBUGGING ON FAILURE **
+    # If any of the `wait.until` commands fail, this block will execute.
+    print("\n❌ SCRIPT FAILED: A timeout occurred.")
+    print(f"Error details: {e}")
+    
+    # Save a screenshot to see what the browser saw
+    screenshot_path = "headless_error.png"
+    driver.save_screenshot(screenshot_path)
+    print(f"Screenshot saved to: {screenshot_path}")
+    
+    # Save the page source to inspect the HTML
+    html_path = "headless_error.html"
+    with open(html_path, "w", encoding="utf-8") as f:
+        f.write(driver.page_source)
+    print(f"Page source saved to: {html_path}")
+
 
 finally:
     # Close the browser

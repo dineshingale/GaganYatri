@@ -2,7 +2,10 @@
 FROM node:18-alpine 
 
 # Install Python and pip (Required for Selenium)
-RUN apk add --no-cache python3 py3-pip 
+RUN apk add --no-cache python3 py3-pip chromium chromium-chromedriver
+
+# 2. Install Selenium (using the break flag to bypass the error you saw)
+RUN pip install selenium --break-system-packages
 
 # Set working directory
 WORKDIR /app
@@ -19,3 +22,4 @@ RUN pip install selenium msedgedriver # msedgedriver might need special installa
 
 # You can define the entrypoint to run your tests here, or run them from Jenkins
 # ENTRYPOINT ["/bin/sh"]
+
