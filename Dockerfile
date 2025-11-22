@@ -36,6 +36,3 @@ RUN npm install
 COPY . .
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
-
-# REMOVED CMD HERE
-# The container will now sit idle or exit immediately unless given a command.
