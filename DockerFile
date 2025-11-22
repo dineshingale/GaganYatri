@@ -1,25 +1,41 @@
-# Example Dockerfile - You will build on a base image
-FROM node:18-alpine 
+# Use Python 3.11 as base
+FROM python:3.11-slim
 
-# Install Python and pip (Required for Selenium)
-RUN apk add --no-cache python3 py3-pip chromium chromium-chromedriver
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV BROWSER=none 
 
-# 2. Install Selenium (using the break flag to bypass the error you saw)
-RUN pip install selenium --break-system-packages
-
-# Set working directory
 WORKDIR /app
 
-# Copy package files and install Node dependencies
-COPY package*.json ./
+# 1. Install System Dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg \
+    unzip \
+    chromium \
+    chromium-driver \
+    netcat-openbsd \
+    && rm -rf /var/lib/apt/lists/*
+
+# 2. Install Node.js
+RUN mkdir -p /etc/apt/keyrings && \
+    wget -qO- https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && apt-get install -y nodejs
+
+# 3. Install Python Dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 4. Install Node Dependencies
+COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy application code
+# 5. Copy the rest
 COPY . .
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
 
-# Install Python dependencies (Selenium)
-RUN pip install selenium msedgedriver # msedgedriver might need special installation
-
-# You can define the entrypoint to run your tests here, or run them from Jenkins
-# ENTRYPOINT ["/bin/sh"]
-
+# REMOVED CMD HERE
+# The container will now sit idle or exit immediately unless given a command.

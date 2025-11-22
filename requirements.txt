@@ -1,0 +1,2 @@
+selenium
+# Add other dependencies if needed (e.g., pytest)

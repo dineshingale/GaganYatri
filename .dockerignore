@@ -1,0 +1,26 @@
+# Ignore Git history
+.git
+.gitignore
+
+# Ignore local dependencies (these are installed inside the container)
+node_modules
+server/node_modules
+
+# Ignore local environment files and sensitive info
+.env
+server/.env
+*.env
+
+# Ignore build artifacts if any
+build
+dist
+
+# Ignore test reports and logs
+*.log
+npm-debug.log*
+
+# Ignore IDE and OS-specific files
+.vscode
+.idea
+.DS_Store
+Thumbs.db
