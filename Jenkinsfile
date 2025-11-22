@@ -39,7 +39,7 @@ pipeline {
                     // -v %CD%:/app mounts the current Jenkins workspace into the container
                     // This allows the container to read the .env file we just made
                     // AND allows Jenkins to see any screenshots saved if the test fails.
-                    bat 'docker run --rm -v %CD%:/app test-runner ./entrypoint.sh'
+                    bat 'docker run --rm -v %CD%:/app -v /app/node_modules test-runner ./entrypoint.sh'
                 }
             }
         }
