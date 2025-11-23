@@ -17,7 +17,7 @@ echo "✅ App is Up! Running Selenium Tests..."
 
 # Run the specific Python Test file you verified manually
 # Make sure this path matches exactly where your file is in the folder structure!
-python "tests/E2E Selenium tests/booking_process.py"
+python "tests/E2E_Selenium_tests/booking_process.py"
 
 # Capture the exit code (0 = Success, 1 = Failure)
 TEST_EXIT_CODE=$?
