@@ -46,7 +46,7 @@ try:
     time.sleep(2) # Allow initial render
 
     # --- Wait for a stable element that appears before the trip options ---
-    wait = WebDriverWait(driver, 100)
+    wait = WebDriverWait(driver, 10)
     
     # --- CHECK IF APP IS RUNNING ---
     try:
