@@ -83,3 +83,5 @@ const BookingPage = () => {
 };
 
 export default BookingPage;
+
+//this is tailwind version of booking page
