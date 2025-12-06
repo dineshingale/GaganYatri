@@ -4,7 +4,6 @@ import ProgressLine from "./ProgressLine/ProgressLine";
 import SelectTravelConfiguration from "./TC/SelectTravelConfiguration";
 import BackNext from "./BackNext/BackNext";
 import Footer from "./Footer/Footer";
-import styles from "./BookingPage.module.css";
 
 const BookingPage = () => {
   const [step, setStep] = useState(1);
@@ -15,37 +14,36 @@ const BookingPage = () => {
     launchsite: null
   });
   const [passengers, setPassengers] = useState([
-  {
-    id: 1,
-    name: "",
-    phone: "",
-    age: "",
-    gender: "",
-    isLeader: false,
-    email: "",
-    address: ""
-  }
+    {
+      id: 1,
+      name: "",
+      phone: "",
+      age: "",
+      gender: "",
+      isLeader: false,
+      email: "",
+      address: ""
+    }
   ]);
 
   const handleNext = () => {
-  
     // Step 5: Passenger validation
     if (step === 5) {
-    const isValid = passengers.every(p => {
-      const basicInfo = p.name && p.phone && p.age && p.gender;
-      const leaderInfo = !p.isLeader || (p.email && p.address);
-      return basicInfo && leaderInfo;
-    });
+      const isValid = passengers.every(p => {
+        const basicInfo = p.name && p.phone && p.age && p.gender;
+        const leaderInfo = !p.isLeader || (p.email && p.address);
+        return basicInfo && leaderInfo;
+      });
 
-    if (!isValid) {
-      alert("Please fill all required fields for each passenger.");
-      return;
+      if (!isValid) {
+        alert("Please fill all required fields for each passenger.");
+        return;
+      }
     }
-  }
 
-     const newStep = Math.min(step + 1, 6);
-     setStep(newStep);
-     setMaxStepReached(prev => Math.max(prev, newStep));
+    const newStep = Math.min(step + 1, 6);
+    setStep(newStep);
+    setMaxStepReached(prev => Math.max(prev, newStep));
   };
 
   const handleBack = () => {
@@ -61,7 +59,8 @@ const BookingPage = () => {
   };
 
   return (
-    <div className={styles.bookingpage}>
+    // Main container: black background, flex column, full width, centered
+    <div className="bg-black flex flex-col items-center justify-center w-full min-h-screen">
       <Header />
       <ProgressLine currentStep={step} maxStepReached={maxStepReached} />
       <SelectTravelConfiguration 
@@ -84,3 +83,5 @@ const BookingPage = () => {
 };
 
 export default BookingPage;
+
+//this is tailwind version of booking page
