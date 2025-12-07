@@ -1,7 +1,7 @@
 import React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 
-const BackNext = ({ onBack, onNext, currentStep, selectedOptions, passengers }) => {
+const BackNext = ({ onBack, onNext, currentStep, selectedOptions, passengers, isSubmitting = false }) => {
   const isOptionSelected = () => {
     
     if (currentStep <= 3) {
@@ -31,8 +31,9 @@ const BackNext = ({ onBack, onNext, currentStep, selectedOptions, passengers }) 
       <div className="max-w-4xl mx-auto flex gap-4 justify-between">
         {showBackButton ? (
           <button
-            onClick={onBack}
-            className="flex items-center gap-2 bg-white/10 border border-white/30 text-white px-8 py-3 rounded-lg font-bold hover:bg-white/20 transition"
+            onClick={() => { if (!isSubmitting) onBack(); }}
+            disabled={isSubmitting}
+            className={`flex items-center gap-2 bg-white/10 border border-white/30 text-white px-8 py-3 rounded-lg font-bold transition ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/20'}`}
           >
             <ChevronLeft size={20} /> Back
           </button>
@@ -41,12 +42,21 @@ const BackNext = ({ onBack, onNext, currentStep, selectedOptions, passengers }) 
         )}
 
         {showNextButton ? (
-          <button
-            onClick={handleNextClick}
-            className="flex items-center gap-2 bg-white text-black px-8 py-3 rounded-lg font-bold hover:bg-gray-200 transition"
-          >
-            Next <ChevronRight size={20} />
-          </button>
+          isSubmitting ? (
+            <button
+              className="flex items-center gap-2 bg-white/40 text-black px-8 py-3 rounded-lg font-bold transition cursor-not-allowed"
+              disabled
+            >
+              Submitting <Loader2 className="animate-spin ml-2" size={18} />
+            </button>
+          ) : (
+            <button
+              onClick={handleNextClick}
+              className="flex items-center gap-2 bg-white text-black px-8 py-3 rounded-lg font-bold hover:bg-gray-200 transition"
+            >
+              Next <ChevronRight size={20} />
+            </button>
+          )
         ) : (
           <button
             className="flex items-center gap-2 bg-green-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-green-700 transition cursor-not-allowed"
