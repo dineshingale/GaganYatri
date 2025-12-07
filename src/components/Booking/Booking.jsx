@@ -3,6 +3,8 @@ import Navbar from './Navbar/Navbar';
 import SelectionContainer from './SelectionContainer/SelectionContainer';
 import BackNext from './Controls/BackNext';
 import Footer from '../HomePage/Footer/Footer';
+import { saveBookingToDatabase } from '../../api/bookingService';
+import LoadingOverlay from '../LoadingOverlay/LoadingOverlay';
 
 // Adventure Images
 import adventure1 from '../../assets/Adventure 1.webp';
@@ -102,6 +104,7 @@ function Booking() {
   // STATE MANAGEMENT
   const [step, setStep] = useState(1);
   const [maxStepReached, setMaxStepReached] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState({
     adventure: null,
     spacecraft: null,
@@ -121,7 +124,28 @@ function Booking() {
   ]);
 
   // NAVIGATION HANDLERS
-  const handleNext = () => {
+  const submitBookingToServer = async () => {
+    const bookingPayload = {
+      adventure: selectedOptions.adventure,
+      spacecraft: selectedOptions.spacecraft,
+      launchsite: selectedOptions.launchsite,
+      passengers,
+      createdAt: new Date().toISOString()
+    };
+
+    setIsSubmitting(true);
+    try {
+      const res = await saveBookingToDatabase(bookingPayload);
+      setIsSubmitting(false);
+      return { success: true, data: res };
+    } catch (err) {
+      console.error('Booking submit error', err);
+      setIsSubmitting(false);
+      return { success: false, error: err };
+    }
+  };
+
+  const handleNext = async () => {
     // Step 5: Passenger validation
     if (step === 5) {
       const isValid = passengers.every(p => {
@@ -137,6 +161,16 @@ function Booking() {
     }
 
     const newStep = Math.min(step + 1, 6);
+
+    // If moving to final confirmation (step 6), submit booking to server first
+    if (step === 5 && newStep === 6) {
+      const result = await submitBookingToServer();
+      if (!result.success) {
+        alert('Booking submission failed. Please try again.');
+        return;
+      }
+    }
+
     setStep(newStep);
     setMaxStepReached(prev => Math.max(prev, newStep));
   };
@@ -185,7 +219,10 @@ function Booking() {
         currentStep={step}
         selectedOptions={selectedOptions}
         passengers={passengers}
+        isSubmitting={isSubmitting}
       />
+
+      {isSubmitting && <LoadingOverlay />}
       
       <Footer />
     </div>
