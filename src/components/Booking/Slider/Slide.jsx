@@ -24,6 +24,8 @@ const Slide = ({ imageUrl, title, subtitle, onSelect, slideData }) => {
           alt={title}
           className="w-full h-full object-cover object-center"
         />
+        {/* Black overlay */}
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       <div className="relative z-[10] w-full h-full flex flex-col items-center justify-center text-center text-white">
