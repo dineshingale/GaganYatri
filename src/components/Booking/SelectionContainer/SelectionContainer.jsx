@@ -31,19 +31,23 @@ const SelectionContainer = ({
 
     const nextIndex = (index + 1) % refs.length;
     
+    // Move to next step after selection
+    onNext();
+
     setTimeout(() => {
       refs[nextIndex].current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 50);
-
 
     const newSelected = {
       ...selectedOptions,
       [type]: option
     };
 
+    // When all three are selected, move to preview (step 4)
     if (newSelected.adventure && newSelected.spacecraft && newSelected.launchsite) {
-
-      onAllSelected && onAllSelected();
+      setTimeout(() => {
+        onNext();
+      }, 300);
     }
   };
 

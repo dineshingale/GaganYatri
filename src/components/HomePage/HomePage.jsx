@@ -101,13 +101,21 @@ const falconSlides = [
 
 
 function App() {
+  const adventureRef = React.useRef(null);
+
+  const handleScrollToAdventure = () => {
+    adventureRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="bg-black">
       <Navbar />
       <main>
-        <HeroSection />
+        <HeroSection onExplore={handleScrollToAdventure} />
         {/* Here we reuse the Slider component with different data */}
-        <Slider slides={starshipSlides} />
+        <div ref={adventureRef}>
+          <Slider slides={starshipSlides} />
+        </div>
         <Slider slides={dragonSlides} />
         <Slider slides={falconSlides} />
       </main>
