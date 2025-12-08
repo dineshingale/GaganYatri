@@ -113,11 +113,15 @@ function App() {
       <main>
         <HeroSection onExplore={handleScrollToAdventure} />
         {/* Here we reuse the Slider component with different data */}
-        <div ref={adventureRef}>
+        <div ref={adventureRef} id="home-adventures">
           <Slider slides={starshipSlides} />
         </div>
-        <Slider slides={dragonSlides} />
-        <Slider slides={falconSlides} />
+        <div id="home-spacecrafts">
+          <Slider slides={dragonSlides} />
+        </div>
+        <div id="home-launchsites">
+          <Slider slides={falconSlides} />
+        </div>
       </main>
       <Footer />
     </div>

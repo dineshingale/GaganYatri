@@ -57,6 +57,7 @@ const SelectionContainer = ({
         {sliderConfigs.map((cfg, i) => (
           <section
             key={cfg.key}
+            id={`slider-${cfg.key}`}
             ref={refs[i]}
             className="w-full min-h-screen border-b border-white/10"
           >

@@ -2,6 +2,13 @@ import React from 'react';
 import logo from '../../../assets/logo.svg'; 
 
 const Navbar = () => {
+  const handleNavScroll = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
   return (
     <nav className="fixed top-0 left-0 w-full flex justify-between items-center z-[100] bg-gradient-to-b from-black/80 to-transparent transition-colors duration-300 p-5 xl:py-[30px] xl:px-[50px]">
       <div className="w-[150px] xl:w-[210px] flex items-center cursor-pointer">
@@ -10,17 +17,17 @@ const Navbar = () => {
 
       <ul className="hidden xl:flex gap-[25px] list-none">
         <li>
-          <a href="#" className="text-white no-underline uppercase text-sm font-bold tracking-[1px] transition-colors duration-200 ease-linear whitespace-nowrap hover:text-gray-300 hover:underline hover:underline-offset-4">
+          <a href="#home-adventures" onClick={(e) => handleNavScroll(e, 'home-adventures')} className="text-white no-underline uppercase text-sm font-bold tracking-[1px] transition-colors duration-200 ease-linear whitespace-nowrap hover:text-gray-300 hover:underline hover:underline-offset-4">
             Adventures
           </a>
         </li>
         <li>
-          <a href="#" className="text-white no-underline uppercase text-sm font-bold tracking-[1px] transition-colors duration-200 ease-linear whitespace-nowrap hover:text-gray-300 hover:underline hover:underline-offset-4">
+          <a href="#home-spacecrafts" onClick={(e) => handleNavScroll(e, 'home-spacecrafts')} className="text-white no-underline uppercase text-sm font-bold tracking-[1px] transition-colors duration-200 ease-linear whitespace-nowrap hover:text-gray-300 hover:underline hover:underline-offset-4">
             Spacecrafts
           </a>
         </li>
         <li>
-          <a href="#" className="text-white no-underline uppercase text-sm font-bold tracking-[1px] transition-colors duration-200 ease-linear whitespace-nowrap hover:text-gray-300 hover:underline hover:underline-offset-4">
+          <a href="#home-launchsites" onClick={(e) => handleNavScroll(e, 'home-launchsites')} className="text-white no-underline uppercase text-sm font-bold tracking-[1px] transition-colors duration-200 ease-linear whitespace-nowrap hover:text-gray-300 hover:underline hover:underline-offset-4">
             Launchsites
           </a>
         </li>
