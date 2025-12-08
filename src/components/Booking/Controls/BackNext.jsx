@@ -28,6 +28,20 @@ const BackNext = ({ onBack, onNext, currentStep, selectedOptions, passengers, is
     onNext();
   };
 
+  const handleBackClick = () => {
+    // First go back to step 3
+    onBack();
+    
+    // If on preview (step 4), scroll to launchsite slider after going back
+    if (currentStep === 4) {
+      setTimeout(() => {
+        const launchsiteElement = document.getElementById('slider-launchsite');
+        if (launchsiteElement) {
+          launchsiteElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  };
   
   const showBackButton = currentStep > 1;
   const showNextButton = currentStep < 6;
@@ -37,7 +51,7 @@ const BackNext = ({ onBack, onNext, currentStep, selectedOptions, passengers, is
       <div className="max-w-4xl mx-auto flex gap-4 justify-between">
         {showBackButton ? (
           <button
-            onClick={() => { if (!isSubmitting) onBack(); }}
+            onClick={() => { if (!isSubmitting) handleBackClick(); }}
             disabled={isSubmitting}
             className={`group relative inline-flex items-center justify-center py-4 px-8 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white overflow-hidden transition-colors duration-300 ease-in-out ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:text-black cursor-pointer'}`}
           >
