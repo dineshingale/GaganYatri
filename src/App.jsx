@@ -12,10 +12,7 @@ export default function MyApp() {
       <Routes className={styles.app}>
         <Route path="/" element={<HomePage />} />
         <Route path="/book" element={<Booking/>}/>
-        <Route path="/booking" element={<Booking />} />
       </Routes>
     </BrowserRouter>
   );
 }
-
-

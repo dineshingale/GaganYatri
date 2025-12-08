@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckCircle, Rocket, MapPin, Users, Mail } from "lucide-react";
+import { Check, Rocket, MapPin, User, Mail } from "lucide-react";
 
 const BookingConfirmation = ({ selectedOptions = {}, passengers = [] }) => {
   const leader = passengers.find(p => p.isLeader);
@@ -11,7 +11,7 @@ const BookingConfirmation = ({ selectedOptions = {}, passengers = [] }) => {
       <div className="max-w-4xl mx-auto">
         {/* Success Header */}
         <div className="text-center mb-12">
-          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <Check className="w-16 h-16 text-white mx-auto mb-4" />
           <h1 className="text-4xl md:text-6xl font-bold uppercase text-white mb-4">
             Booking Confirmed!
           </h1>
@@ -21,16 +21,16 @@ const BookingConfirmation = ({ selectedOptions = {}, passengers = [] }) => {
         </div>
 
         {/* Trip Details */}
-        <div className="bg-white/5 border border-white/20 rounded-lg p-8 mb-8">
+        <div className="bg-black border border-white p-8 mb-8">
           <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-            <Rocket className="text-blue-400" /> Your Space Adventure
+            <Rocket className="text-white" /> Your Space Adventure
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             {/* Adventure */}
             {adventure && (
               <div className="text-center">
-                <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
+                <div className="w-full h-48 overflow-hidden mb-4">
                   <img
                     src={adventure.imageUrl}
                     alt={adventure.title}
@@ -45,7 +45,7 @@ const BookingConfirmation = ({ selectedOptions = {}, passengers = [] }) => {
             {/* Spacecraft */}
             {spacecraft && (
               <div className="text-center">
-                <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
+                <div className="w-full h-48 overflow-hidden mb-4">
                   <img
                     src={spacecraft.imageUrl}
                     alt={spacecraft.title}
@@ -60,7 +60,7 @@ const BookingConfirmation = ({ selectedOptions = {}, passengers = [] }) => {
             {/* Launchsite */}
             {launchsite && (
               <div className="text-center">
-                <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
+                <div className="w-full h-48 overflow-hidden mb-4">
                   <img
                     src={launchsite.imageUrl}
                     alt={launchsite.title}
@@ -81,14 +81,14 @@ const BookingConfirmation = ({ selectedOptions = {}, passengers = [] }) => {
         </div>
 
         {/* Passenger Details */}
-        <div className="bg-white/5 border border-white/20 rounded-lg p-8 mb-8">
+        <div className="bg-black border border-white p-8 mb-8">
           <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-            <Users className="text-purple-400" /> Passenger Information
+            <User className="text-white" /> Passenger Information
           </h2>
 
           {/* Trip Leader */}
           {leader && (
-            <div className="mb-8 p-6 bg-white/5 border border-yellow-500/30 rounded-lg">
+            <div className="mb-8 p-6 bg-black border border-white">
               <p className="text-sm font-bold text-yellow-400 mb-4 uppercase">Trip Leader</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -127,7 +127,7 @@ const BookingConfirmation = ({ selectedOptions = {}, passengers = [] }) => {
               <p className="text-sm font-bold text-white/70 mb-4 uppercase">Companions</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {companions.map((companion, index) => (
-                  <div key={index} className="p-4 bg-white/5 border border-white/20 rounded-lg">
+                  <div key={index} className="p-4 bg-black border border-white">
                     <p className="text-sm text-white/70">Companion {index + 1}</p>
                     <p className="text-lg font-bold text-white">{companion.name}</p>
                     <p className="text-sm text-white/70 mt-2">
@@ -141,11 +141,11 @@ const BookingConfirmation = ({ selectedOptions = {}, passengers = [] }) => {
         </div>
 
         {/* Confirmation Message */}
-        <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-8 text-center">
-          <p className="text-white/80 mb-4">
+        <div className="bg-black border border-white p-8 text-center">
+          <p className="text-white mb-4">
             A confirmation email has been sent to <strong>{leader?.email}</strong>
           </p>
-          <p className="text-white/80">
+          <p className="text-white">
             Thank you for choosing GaganYatri! Get ready for your incredible journey through space! 🚀
           </p>
         </div>

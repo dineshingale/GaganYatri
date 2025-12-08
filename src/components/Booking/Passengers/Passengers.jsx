@@ -3,6 +3,12 @@ import { usePassengers } from "./usePassengers";
 import { Plus, Trash2, User } from "lucide-react";
 
 const Passengers = ({ onNext, passengers, setPassengers }) => {
+  const ArrowIcon = () => (
+    <svg className="icon ml-4 w-[14px] h-[14px] fill-white transition-transform duration-300 ease-in-out group-hover:fill-black group-hover:-translate-y-0.5" viewBox="0 0 13 12" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11.9893 5.58371L12.2471 5.89914L11.9893 6.21555L8.10059 10.9782L7.3252 10.3454L10.5479 6.39914L1.39941 6.39914L1.39941 5.39914L10.5479 5.39914L7.3252 1.45383L8.10059 0.821014L11.9893 5.58371Z"/>
+    </svg>
+  );
+
   const {
     currentPassengerIndex,
     passengerListRef,
@@ -38,9 +44,10 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
             <h3 className="text-xl font-bold text-white">Passengers</h3>
             <button
               onClick={addPassenger}
-              className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg font-bold hover:bg-gray-200 transition"
+              className="group relative inline-flex items-center justify-center py-2 px-4 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white overflow-hidden transition-colors duration-300 ease-in-out hover:text-black cursor-pointer"
             >
-              <Plus size={20} /> Add Passenger
+              <span className="relative z-10 flex items-center"><Plus size={16} className="mr-2" /> Add Passenger</span>
+              <div className="absolute inset-0 bg-white transform scale-y-0 origin-bottom transition-transform duration-300 ease-in-out group-hover:scale-y-100"></div>
             </button>
           </div>
 
@@ -52,15 +59,15 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
               <div
                 key={passenger.id}
                 onClick={() => handlePassengerNext()}
-                className={`flex-shrink-0 w-24 h-24 rounded-lg flex items-center justify-center cursor-pointer transition ${
+                className={`flex-shrink-0 w-24 h-24 flex items-center justify-center cursor-pointer transition border-2 ${
                   currentPassengerIndex === index
-                    ? "bg-white text-black border-2 border-white"
-                    : "bg-white/10 text-white border-2 border-white/20 hover:border-white/40"
+                    ? "border-white"
+                    : "border-white/40"
                 }`}
               >
-                <div className="text-center">
-                  <User size={20} className="mx-auto mb-1" />
-                  <p className="text-xs font-bold">
+                <div className="text-center relative z-10">
+                  <User size={20} className="mx-auto mb-1 text-white" />
+                  <p className="text-xs font-bold text-white">
                     {passenger.name || `P${passenger.id}`}
                   </p>
                   {passenger.isLeader && (
@@ -74,7 +81,7 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
 
         {/* Passenger Form */}
         {currentPassenger && (
-          <div className="bg-white/5 border border-white/20 rounded-lg p-8 mb-8">
+          <div className="bg-black border border-white p-8 mb-8">
             <h3 className="text-2xl font-bold text-white mb-6">
               {currentPassenger.isLeader ? "Trip Leader" : "Passenger"} #{currentPassengerIndex + 1}
             </h3>
@@ -82,7 +89,7 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               {/* Name */}
               <div>
-                <label className="block text-sm font-bold text-white/70 mb-2">
+                <label className="block text-sm font-bold text-white mb-2">
                   Full Name *
                 </label>
                 <input
@@ -91,14 +98,14 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
                   onChange={(e) =>
                     handleInputChange(currentPassenger.id, "name", e.target.value)
                   }
-                  className="w-full bg-white/10 border border-white/20 rounded px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white"
+                  className="w-full bg-black border border-white px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white"
                   placeholder="Enter full name"
                 />
               </div>
 
               {/* Phone */}
               <div>
-                <label className="block text-sm font-bold text-white/70 mb-2">
+                <label className="block text-sm font-bold text-white mb-2">
                   Phone Number *
                 </label>
                 <input
@@ -107,14 +114,14 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
                   onChange={(e) =>
                     handleInputChange(currentPassenger.id, "phone", e.target.value)
                   }
-                  className="w-full bg-white/10 border border-white/20 rounded px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white"
+                  className="w-full bg-black border border-white px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white"
                   placeholder="Enter phone number"
                 />
               </div>
 
               {/* Age */}
               <div>
-                <label className="block text-sm font-bold text-white/70 mb-2">
+                <label className="block text-sm font-bold text-white mb-2">
                   Age *
                 </label>
                 <input
@@ -123,14 +130,14 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
                   onChange={(e) =>
                     handleInputChange(currentPassenger.id, "age", e.target.value)
                   }
-                  className="w-full bg-white/10 border border-white/20 rounded px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white"
+                  className="w-full bg-black border border-white px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white"
                   placeholder="Enter age"
                 />
               </div>
 
               {/* Gender */}
               <div>
-                <label className="block text-sm font-bold text-white/70 mb-2">
+                <label className="block text-sm font-bold text-white mb-2">
                   Gender *
                 </label>
                 <select
@@ -138,7 +145,7 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
                   onChange={(e) =>
                     handleInputChange(currentPassenger.id, "gender", e.target.value)
                   }
-                  className="w-full bg-white/10 border border-white/20 rounded px-4 py-2 text-white focus:outline-none focus:border-white"
+                  className="w-full bg-black border border-white px-4 py-2 text-white focus:outline-none focus:border-white"
                 >
                   <option value="">Select Gender</option>
                   <option value="Male">Male</option>
@@ -150,16 +157,16 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
 
             {/* Leader Fields */}
             {currentPassenger.isLeader && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 p-6 bg-white/5 border border-white/20 rounded">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 p-6 bg-black border border-white">
                 <div className="md:col-span-2">
-                  <p className="text-sm font-bold text-yellow-400 mb-4">
+                  <p className="text-sm font-bold text-white mb-4">
                     Leader Information Required
                   </p>
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-bold text-white/70 mb-2">
+                  <label className="block text-sm font-bold text-white mb-2">
                     Email *
                   </label>
                   <input
@@ -168,14 +175,14 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
                     onChange={(e) =>
                       handleInputChange(currentPassenger.id, "email", e.target.value)
                     }
-                    className="w-full bg-white/10 border border-white/20 rounded px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white"
+                    className="w-full bg-black border border-white px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white"
                     placeholder="Enter email"
                   />
                 </div>
 
                 {/* Address */}
                 <div>
-                  <label className="block text-sm font-bold text-white/70 mb-2">
+                  <label className="block text-sm font-bold text-white mb-2">
                     Address *
                   </label>
                   <input
@@ -184,7 +191,7 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
                     onChange={(e) =>
                       handleInputChange(currentPassenger.id, "address", e.target.value)
                     }
-                    className="w-full bg-white/10 border border-white/20 rounded px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white"
+                    className="w-full bg-black border border-white px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white"
                     placeholder="Enter address"
                   />
                 </div>
@@ -195,9 +202,10 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
             {!currentPassenger.isLeader && (
               <button
                 onClick={() => setLeader(currentPassenger.id)}
-                className="w-full mb-6 bg-white/10 border border-white/30 text-white px-4 py-2 rounded font-bold hover:bg-white/20 transition"
+                className="group relative w-full mb-6 inline-flex items-center justify-center py-3 px-4 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white overflow-hidden transition-colors duration-300 ease-in-out hover:text-black cursor-pointer"
               >
-                Set as Trip Leader
+                <span className="relative z-10">Set as Trip Leader</span>
+                <div className="absolute inset-0 bg-white transform scale-y-0 origin-bottom transition-transform duration-300 ease-in-out group-hover:scale-y-100"></div>
               </button>
             )}
 
@@ -205,9 +213,10 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
             {passengers.length > 1 && (
               <button
                 onClick={() => removePassenger(currentPassenger.id)}
-                className="w-full flex items-center justify-center gap-2 bg-red-900/30 border border-red-500 text-red-400 px-4 py-2 rounded font-bold hover:bg-red-900/50 transition"
+                className="group relative w-full inline-flex items-center justify-center py-3 px-4 text-red-400 uppercase text-sm font-semibold tracking-wider border-2 border-red-500 overflow-hidden transition-colors duration-300 ease-in-out hover:text-black cursor-pointer"
               >
-                <Trash2 size={18} /> Remove Passenger
+                <span className="relative z-10 flex items-center"><Trash2 size={16} className="mr-2" /> Remove Passenger</span>
+                <div className="absolute inset-0 bg-red-500 transform scale-y-0 origin-bottom transition-transform duration-300 ease-in-out group-hover:scale-y-100"></div>
               </button>
             )}
           </div>
@@ -218,14 +227,22 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
           <button
             onClick={handlePrev}
             disabled={currentPassengerIndex === 0}
-            className="flex-1 bg-white/10 border border-white/30 text-white px-6 py-3 rounded font-bold hover:bg-white/20 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className={`flex-1 inline-flex items-center justify-center py-3 px-6 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white transition-colors duration-300 ease-in-out cursor-pointer ${
+              currentPassengerIndex === 0
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-white hover:text-black"
+            }`}
           >
             Previous Passenger
           </button>
           <button
             onClick={handlePassengerNext}
             disabled={currentPassengerIndex === passengers.length - 1}
-            className="flex-1 bg-white/10 border border-white/30 text-white px-6 py-3 rounded font-bold hover:bg-white/20 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className={`flex-1 inline-flex items-center justify-center py-3 px-6 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white transition-colors duration-300 ease-in-out cursor-pointer ${
+              currentPassengerIndex === passengers.length - 1
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-white hover:text-black"
+            }`}
           >
             Next Passenger
           </button>
