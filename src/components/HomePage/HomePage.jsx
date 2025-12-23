@@ -13,9 +13,9 @@ import adventure5 from '../../assets/Adventure 5.webp';
 import adventure6 from '../../assets/Adventure 6.webp';
 
 // Rockets & Spacecraft
-import falcon from '../../assets/falcon.jpg';
-import starship from '../../assets/starship.jpg';
-import gaganyan from '../../assets/gaganyan.jpg';
+import falcon from '../../assets/Spacecraft 1.webp';
+import starship from '../../assets/Spacecraft 2.webp';
+import gaganyan from '../../assets/Spacecraft 3.webp';
 
 // Launch Sites
 import launchsiteChennai from '../../assets/launchsite Chennai.webp';
