@@ -1,5 +1,5 @@
 import React from 'react';
-import videoSource from '../../../assets/Mars_Rotation_Web_HB_d96299f9de.mp4';
+import videoSource from '../../../assets/Mars_Rotation_Web_HB_d96299f9de.webm';
 
 const HeroSection = ({ onExplore }) => {
   const ArrowIcon = () => (
