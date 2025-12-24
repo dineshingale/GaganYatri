@@ -133,6 +133,7 @@ try:
     
     # --- 6. CONFIRMATION ---
     print(">>> Step 6: Waiting for Confirmation...")
+    time.sleep(5) # Initial wait before checking
     
     try:
         wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), 'Booking Confirmed')]")))
