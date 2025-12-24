@@ -19,7 +19,7 @@ const HeroSection = ({ onExplore }) => {
           poster="https://www.spacex.com/static/images/backgrounds/mars_landing.jpg"
           className="w-full h-full object-cover"
         >
-          <source src={videoSource} type="video/mp4" />
+          <source src={videoSource} type="video/webm" />
         </video>
         
       </div>
