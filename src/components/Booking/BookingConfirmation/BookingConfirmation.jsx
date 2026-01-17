@@ -1,5 +1,5 @@
 import React from "react";
-import { Check, Rocket, MapPin, User, Mail } from "lucide-react";
+import { Check, Rocket, User, Mail } from "lucide-react";
 
 const BookingConfirmation = ({ selectedOptions = {}, passengers = [] }) => {
   const leader = passengers.find(p => p.isLeader);

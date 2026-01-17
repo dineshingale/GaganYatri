@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from '../../../assets/logo.svg'; 
+import logo from '../../../assets/logo.svg';
 import ProgressLine from '../ProgressLine/ProgressLine';
 
 const Navbar = ({ currentStep = 1 }) => {
   return (
     <nav className="fixed top-0 left-0 w-full z-[100] bg-gradient-to-b from-black/80 to-transparent transition-colors duration-300 p-5 min-[1350px]:py-[30px] min-[1350px]:px-[50px] overflow-x-hidden">
-      
+
       {/* FIRST ROW - always visible: logo (left) and My Account (right).
           Keep these in a nowrap container so they never drop to a second row.
       */}
@@ -22,12 +22,11 @@ const Navbar = ({ currentStep = 1 }) => {
         </div>
 
         <div className="flex-none flex items-center">
-          <a 
-            href="#" 
-            className="flex items-center bg-transparent border border-white/40 py-2 px-4 rounded text-white uppercase text-xs font-bold tracking-[1px] no-underline transition-colors duration-300 whitespace-nowrap hover:border-white"
+          <button
+            className="flex items-center bg-transparent border border-white/40 py-2 px-4 rounded text-white uppercase text-xs font-bold tracking-[1px] no-underline transition-colors duration-300 whitespace-nowrap hover:border-white cursor-pointer"
           >
             My Account
-          </a>
+          </button>
         </div>
       </div>
 

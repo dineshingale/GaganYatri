@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../../assets/logo.svg'; 
+import logo from '../../../assets/logo.svg';
 
 const Navbar = () => {
   const handleNavScroll = (e, sectionId) => {
@@ -34,12 +34,11 @@ const Navbar = () => {
       </ul>
 
       <div className="hidden md:flex items-center">
-        <a 
-          href="#" 
-          className="flex items-center bg-transparent border border-white/40 py-2 px-4 rounded text-white uppercase text-xs font-bold tracking-[1px] no-underline transition-colors duration-300 whitespace-nowrap hover:border-white"
+        <button
+          className="flex items-center bg-transparent border border-white/40 py-2 px-4 rounded text-white uppercase text-xs font-bold tracking-[1px] no-underline transition-colors duration-300 whitespace-nowrap hover:border-white cursor-pointer"
         >
           My Account
-        </a>
+        </button>
       </div>
     </nav>
   );

@@ -3,12 +3,6 @@ import { usePassengers } from "./usePassengers";
 import { Plus, Trash2, User } from "lucide-react";
 
 const Passengers = ({ onNext, passengers, setPassengers }) => {
-  const ArrowIcon = () => (
-    <svg className="icon ml-4 w-[14px] h-[14px] fill-white transition-transform duration-300 ease-in-out group-hover:fill-black group-hover:-translate-y-0.5" viewBox="0 0 13 12" xmlns="http://www.w3.org/2000/svg">
-      <path d="M11.9893 5.58371L12.2471 5.89914L11.9893 6.21555L8.10059 10.9782L7.3252 10.3454L10.5479 6.39914L1.39941 6.39914L1.39941 5.39914L10.5479 5.39914L7.3252 1.45383L8.10059 0.821014L11.9893 5.58371Z"/>
-    </svg>
-  );
-
   const {
     currentPassengerIndex,
     passengerListRef,
@@ -23,13 +17,6 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
 
   const currentPassenger = passengers[currentPassengerIndex];
 
-  const handleSubmit = () => {
-    if (!validatePassengers()) {
-      alert("Please fill all required fields for each passenger.");
-      return;
-    }
-    onNext();
-  };
 
   return (
     <section className="w-full min-h-screen bg-black pt-32 pb-20 px-5 md:px-10 lg:px-20">
@@ -59,11 +46,10 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
               <div
                 key={passenger.id}
                 onClick={() => handlePassengerNext()}
-                className={`flex-shrink-0 w-24 h-24 flex items-center justify-center cursor-pointer transition border-2 ${
-                  currentPassengerIndex === index
-                    ? "border-white"
-                    : "border-white/40"
-                }`}
+                className={`flex-shrink-0 w-24 h-24 flex items-center justify-center cursor-pointer transition border-2 ${currentPassengerIndex === index
+                  ? "border-white"
+                  : "border-white/40"
+                  }`}
               >
                 <div className="text-center relative z-10">
                   <User size={20} className="mx-auto mb-1 text-white" />
@@ -227,22 +213,20 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
           <button
             onClick={handlePrev}
             disabled={currentPassengerIndex === 0}
-            className={`flex-1 inline-flex items-center justify-center py-3 px-6 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white transition-colors duration-300 ease-in-out cursor-pointer ${
-              currentPassengerIndex === 0
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-white hover:text-black"
-            }`}
+            className={`flex-1 inline-flex items-center justify-center py-3 px-6 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white transition-colors duration-300 ease-in-out cursor-pointer ${currentPassengerIndex === 0
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-white hover:text-black"
+              }`}
           >
             Previous Passenger
           </button>
           <button
             onClick={handlePassengerNext}
             disabled={currentPassengerIndex === passengers.length - 1}
-            className={`flex-1 inline-flex items-center justify-center py-3 px-6 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white transition-colors duration-300 ease-in-out cursor-pointer ${
-              currentPassengerIndex === passengers.length - 1
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-white hover:text-black"
-            }`}
+            className={`flex-1 inline-flex items-center justify-center py-3 px-6 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white transition-colors duration-300 ease-in-out cursor-pointer ${currentPassengerIndex === passengers.length - 1
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-white hover:text-black"
+              }`}
           >
             Next Passenger
           </button>

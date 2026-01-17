@@ -13,20 +13,19 @@ const ProgressLine = ({ currentStep = 1 }) => {
   return (
     <div className="w-full bg-transparent p-6 flex justify-center">
       <nav aria-label="Progress" className="w-fit max-w-full overflow-x-auto no-scrollbar">
-        <ol 
-          role="list" 
+        <ol
           className="flex items-center bg-transparent"
         >
           {steps.map((step, stepIdx) => {
             const isCompleted = currentStep > step.id;
             const isCurrent = currentStep === step.id;
-            
+
             return (
-              <li 
-                key={step.id} 
+              <li
+                key={step.id}
                 className="relative flex items-center flex-none"
               >
-            
+
                 <div className={`
                   group flex items-center justify-center px-4 py-3 text-sm font-medium transition-colors duration-300
                   ${isCurrent ? 'text-white' : 'text-white/60 hover:text-white'}
@@ -34,10 +33,10 @@ const ProgressLine = ({ currentStep = 1 }) => {
                   {/* Circle Indicator */}
                   <span className={`
                     flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full border-2 transition-all duration-300 z-20 relative
-                    ${isCompleted 
-                      ? 'bg-white border-white text-black' 
-                      : isCurrent 
-                        ? 'border-white text-white shadow-[0_0_10px_rgba(255,255,255,0.5)]' 
+                    ${isCompleted
+                      ? 'bg-white border-white text-black'
+                      : isCurrent
+                        ? 'border-white text-white shadow-[0_0_10px_rgba(255,255,255,0.5)]'
                         : 'border-white/60 text-white/60 group-hover:border-white'
                     }
                   `}>

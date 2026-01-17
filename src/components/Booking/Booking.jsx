@@ -103,7 +103,6 @@ const LaunchsiteSlides = [
 function Booking() {
   // STATE MANAGEMENT
   const [step, setStep] = useState(1);
-  const [maxStepReached, setMaxStepReached] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState({
     adventure: null,
@@ -172,7 +171,7 @@ function Booking() {
     }
 
     setStep(newStep);
-    setMaxStepReached(prev => Math.max(prev, newStep));
+
   };
 
   const handleBack = () => {
@@ -191,15 +190,15 @@ function Booking() {
   const goToPreview = () => {
     const newStep = 4;
     setStep(newStep);
-    setMaxStepReached(prev => Math.max(prev, newStep));
+
   };
 
   return (
     <div className="bg-black min-h-screen flex flex-col">
       <Navbar currentStep={step} />
-      
+
       <main className="flex-1 w-full">
-        <SelectionContainer 
+        <SelectionContainer
           step={step}
           selectedOptions={selectedOptions}
           passengers={passengers}
@@ -213,8 +212,8 @@ function Booking() {
         />
       </main>
 
-      <BackNext 
-        onBack={handleBack} 
+      <BackNext
+        onBack={handleBack}
         onNext={handleNext}
         currentStep={step}
         selectedOptions={selectedOptions}
@@ -223,7 +222,7 @@ function Booking() {
       />
 
       {isSubmitting && <LoadingOverlay />}
-      
+
       <Footer />
     </div>
   );

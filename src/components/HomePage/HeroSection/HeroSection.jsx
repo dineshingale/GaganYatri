@@ -34,11 +34,11 @@ const HeroSection = ({ onExplore }) => {
           </p>
 
           <div className="flex flex-row gap-4">
-            <a onClick={onExplore} className="cursor-pointer group relative inline-flex items-center justify-center py-4 px-8 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white overflow-hidden transition-colors duration-300 ease-in-out hover:text-black">
+            <button onClick={onExplore} className="cursor-pointer group relative inline-flex items-center justify-center py-4 px-8 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white overflow-hidden transition-colors duration-300 ease-in-out hover:text-black">
               <span className="relative z-10">Explore</span>
               <ArrowIcon />
               <div className="absolute inset-0 bg-white transform scale-y-0 origin-bottom transition-transform duration-300 ease-in-out group-hover:scale-y-100"></div>
-            </a>
+            </button>
             <a href="/book" className="group relative inline-flex items-center justify-center py-4 px-8 text-white uppercase text-sm font-semibold tracking-wider border-2 border-white overflow-hidden transition-colors duration-300 ease-in-out hover:text-black">
               <span className="relative z-10">Book</span>
               <ArrowIcon />
