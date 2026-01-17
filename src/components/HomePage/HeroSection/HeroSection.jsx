@@ -24,7 +24,7 @@ const HeroSection = ({ onExplore }) => {
 
       </div>
 
-      <div className="relative w-full max-w-[1400px] mx-auto px-12 pb-[15%]">
+      <div className="relative w-full h-full max-w-[1400px] mx-auto px-6 md:px-12 flex items-end pb-20 md:pb-32">
         <div className="max-w-[600px] opacity-0 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
           <h2 className="text-5xl font-bold uppercase leading-tight mb-5 tracking-wide">
             Experience the thrill of Space Adventures
