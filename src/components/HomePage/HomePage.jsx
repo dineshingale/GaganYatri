@@ -29,32 +29,32 @@ const starshipSlides = [
   {
     imageUrl: adventure1,
     title: 'View from Above',
-    subtitle: 'Service to Earth Orbit, Moon, Mars and Beyond'
+    subtitle: 'Witness the blue marble from an orbital perspective'
   },
   {
     imageUrl: adventure2,
     title: 'Space Parks',
-    subtitle: 'The Most Powerful Launch Vehicle Ever Developed'
+    subtitle: 'Experience zero-gravity recreation zones in orbit'
   },
   {
     imageUrl: adventure3,
     title: 'Moon',
-    subtitle: 'The Most Powerful Launch Vehicle Ever Developed'
+    subtitle: 'Return to the lunar surface and establish a base'
   },
   {
     imageUrl: adventure4,
     title: 'Mars',
-    subtitle: 'The Most Powerful Launch Vehicle Ever Developed'
+    subtitle: 'The first step towards becoming a multi-planetary species'
   },
   {
     imageUrl: adventure5,
     title: 'Europa',
-    subtitle: 'The Most Powerful Launch Vehicle Ever Developed'
+    subtitle: 'Explore the icy oceans of Jupiter’s mysterious moon'
   },
   {
     imageUrl: adventure6,
     title: 'Titan',
-    subtitle: 'The Most Powerful Launch Vehicle Ever Developed'
+    subtitle: 'Venture into the thick atmosphere of Saturn’s moon'
   }
 ];
 
@@ -95,7 +95,7 @@ const falconSlides = [
   {
     imageUrl: launchsiteTokyo,
     title: 'Tokyo, Japan',
-    subtitle: 'Building the logistics chain for colonies'
+    subtitle: 'High-tech gateway connecting Asia to the stars'
   }
 ];
 
