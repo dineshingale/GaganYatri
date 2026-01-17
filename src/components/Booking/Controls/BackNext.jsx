@@ -1,15 +1,15 @@
 import React from "react";
-import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { ChevronLeft, Loader2 } from "lucide-react";
 
 const BackNext = ({ onBack, onNext, currentStep, selectedOptions, passengers, isSubmitting = false }) => {
   const ArrowIcon = () => (
     <svg className="icon ml-4 w-[14px] h-[14px] fill-white transition-transform duration-300 ease-in-out group-hover:fill-black group-hover:-translate-y-0.5" viewBox="0 0 13 12" xmlns="http://www.w3.org/2000/svg">
-      <path d="M11.9893 5.58371L12.2471 5.89914L11.9893 6.21555L8.10059 10.9782L7.3252 10.3454L10.5479 6.39914L1.39941 6.39914L1.39941 5.39914L10.5479 5.39914L7.3252 1.45383L8.10059 0.821014L11.9893 5.58371Z"/>
+      <path d="M11.9893 5.58371L12.2471 5.89914L11.9893 6.21555L8.10059 10.9782L7.3252 10.3454L10.5479 6.39914L1.39941 6.39914L1.39941 5.39914L10.5479 5.39914L7.3252 1.45383L8.10059 0.821014L11.9893 5.58371Z" />
     </svg>
   );
 
   const isOptionSelected = () => {
-    
+
     if (currentStep <= 3) {
       return (
         selectedOptions?.adventure &&
@@ -31,7 +31,7 @@ const BackNext = ({ onBack, onNext, currentStep, selectedOptions, passengers, is
   const handleBackClick = () => {
     // First go back to step 3
     onBack();
-    
+
     // If on preview (step 4), scroll to launchsite slider after going back
     if (currentStep === 4) {
       setTimeout(() => {
@@ -42,7 +42,7 @@ const BackNext = ({ onBack, onNext, currentStep, selectedOptions, passengers, is
       }, 100);
     }
   };
-  
+
   const showBackButton = currentStep > 1;
   const showNextButton = currentStep < 6;
 
