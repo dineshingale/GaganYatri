@@ -11,8 +11,7 @@ const Passengers = ({ onNext, passengers, setPassengers }) => {
     setLeader,
     handleInputChange,
     handleNext: handlePassengerNext,
-    handlePrev,
-    validatePassengers
+    handlePrev
   } = usePassengers(passengers, setPassengers);
 
   const currentPassenger = passengers[currentPassengerIndex];
